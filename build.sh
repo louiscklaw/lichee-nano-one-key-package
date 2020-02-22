@@ -31,9 +31,9 @@ pull_uboot(){
 	if [ ! -d ${temp_root_dir}/${u_boot_dir}/u-boot ]; then
 		echo "Error:pull u_boot failed"
     		exit 0
-	else	
-		mv ${temp_root_dir}/${u_boot_dir}/u-boot/* ${temp_root_dir}/${u_boot_dir}/	
-		rm -rf ${temp_root_dir}/${u_boot_dir}/u-boot	
+	else
+		mv ${temp_root_dir}/${u_boot_dir}/u-boot/* ${temp_root_dir}/${u_boot_dir}/
+		rm -rf ${temp_root_dir}/${u_boot_dir}/u-boot
 		echo "pull buildroot ok"
 	fi
 }
@@ -46,7 +46,7 @@ pull_linux(){
 	if [ ! -d ${temp_root_dir}/${linux_dir}/linux ]; then
 		echo "Error:pull linux failed"
     		exit 0
-	else	
+	else
 		mv ${temp_root_dir}/${linux_dir}/linux/* ${temp_root_dir}/${linux_dir}/
 		rm -rf ${temp_root_dir}/${linux_dir}/linux
 		echo "pull buildroot ok"
@@ -58,13 +58,15 @@ pull_toolchain(){
 	cd ${temp_root_dir}/${toolchain_dir}
 	ldconfig
 	if [ $(getconf WORD_BIT) = '32' ] && [ $(getconf LONG_BIT) = '64' ] ; then
-		wget http://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabi/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabi.tar.xz &&\
-		tar xvJf gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabi.tar.xz
-		if [ ! -d ${temp_root_dir}/${toolchain_dir}/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabi ]; then
+		# wget http://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabi/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabi.tar.xz &&\
+		# tar xvJf gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabi.tar.xz
+		wget http://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabi/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi.tar.xz &&\
+		tar xvJf gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi.tar.xz
+		if [ ! -d ${temp_root_dir}/${toolchain_dir}/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin ]; then
 			echo "Error:pull toolchain failed"
 	    		exit 0
-		else			
-			echo "pull buildroot ok"
+		else
+			echo "pull buildroot ok for 7.5.0"
 		fi
 	else
 	 	wget http://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabi/gcc-linaro-7.4.1-2019.02-i686_arm-linux-gnueabi.tar.xz &&\
@@ -72,7 +74,7 @@ pull_toolchain(){
 		if [ ! -d ${temp_root_dir}/${toolchain_dir}/gcc-linaro-7.4.1-2019.02-i686_arm-linux-gnueabi ]; then
 			echo "Error:pull toolchain failed"
 	    		exit 0
-		else			
+		else
 			echo "pull buildroot ok"
 		fi
 	fi
@@ -86,21 +88,28 @@ pull_buildroot(){
 	if [ ! -d ${temp_root_dir}/${buildroot_dir}/buildroot-2017.08 ]; then
 		echo "Error:pull buildroot failed"
     		exit 0
-	else			
+	else
 		# mv ${temp_root_dir}/${buildroot_dir}/buildroot-2017.08/* ${temp_root_dir}/${buildroot_dir}/buildroot-2017.08
 		# rm -rf ${temp_root_dir}/${buildroot_dir}/buildroot-2017.08
 		echo "pull buildroot ok"
 	fi
 }
 pull_all(){
-        sudo apt-get update
-	sudo apt-get install -y autoconf automake libtool gettext 
-        sudo apt-get install -y make gcc g++ swig python-dev bc python u-boot-tools bison flex bc libssl-dev libncurses5-dev unzip mtd-utils
+	apt-get update
+	apt install -y git sudo wget tmux
+	sudo apt-get install -y autoconf automake libtool gettext
+	sudo apt-get install -y make gcc g++ swig python-dev bc python u-boot-tools bison flex bc libssl-dev libncurses5-dev unzip mtd-utils
 	sudo apt-get install -y libc6-i386 lib32stdc++6 lib32z1
+	# sudo apt-get install -y libc6 lib32stdc++6 lib32z1
 	sudo apt-get install -y libc6:i386 libstdc++6:i386 zlib1g:i386
+	sudo apt-get install -y rsync cpio
+	echo 'pull_uboot'
 	pull_uboot
+	echo 'pull_linux'
 	pull_linux
+	echo 'pull_toolchain'
 	pull_toolchain
+	echo 'pull_buildroot'
 	pull_buildroot
 	cp -f ${temp_root_dir}/buildroot.config ${temp_root_dir}/${buildroot_dir}/buildroot-2017.08
 	cp -f ${temp_root_dir}/linux-licheepi_nano_defconfig ${temp_root_dir}/${linux_dir}/arch/arm/configs/licheepi_nano_defconfig
@@ -115,17 +124,17 @@ pull_all(){
 
 #env===================================================================
 update_env(){
-	if [ ! -d ${temp_root_dir}/${toolchain_dir}/gcc-linaro-7.4.1-2019.02-i686_arm-linux-gnueabi ]; then
+	if [ ! -d ${temp_root_dir}/${toolchain_dir}/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi ]; then
 		if [ ! -d ${temp_root_dir}/${toolchain_dir}/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabi ]; then
 			echo "Error:toolchain no found,Please use ./buid.sh pull_all "
 	    		exit 0
-		else			
+		else
 			export PATH="$PWD/${toolchain_dir}/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabi/bin":"$PATH"
 		fi
 	else
-		export PATH="$PWD/${toolchain_dir}/gcc-linaro-7.4.1-2019.02-i686_arm-linux-gnueabi/bin":"$PATH"
+		export PATH="$PWD/${toolchain_dir}/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin":"$PATH"
 	fi
-	
+
 }
 check_env(){
 	if [ ! -d ${temp_root_dir}/${toolchain_dir} ] ||\
@@ -162,7 +171,7 @@ clean_uboot(){
 
 build_uboot(){
 	cd ${temp_root_dir}/${u_boot_dir}
-	echo "Building uboot ..."
+	echo "into build_uboot ..."
     	echo "--->Configuring ..."
 	make ARCH=arm CROSS_COMPILE=${cross_compiler}- ${u_boot_config_file} > /dev/null 2>&1
         # cp -f ${temp_root_dir}/${u_boot_config_file} ${temp_root_dir}/${u_boot_dir}/.config
@@ -234,7 +243,7 @@ build_linux(){
 	#build linux kernel modules
 	make ARCH=arm CROSS_COMPILE=${cross_compiler}- -j${proc_processor} INSTALL_MOD_PATH=${temp_root_dir}/${linux_dir}/mod_output modules > /dev/null 2>&1
 	make ARCH=arm CROSS_COMPILE=${cross_compiler}- -j${proc_processor} INSTALL_MOD_PATH=${temp_root_dir}/${linux_dir}/mod_output modules_install > /dev/null 2>&1
-	
+
 	echo "Build linux ok"
 }
 #linux=========================================================
@@ -242,6 +251,7 @@ build_linux(){
 #linux=========================================================
 
 clean_buildroot(){
+	echo "cleaning buildroot"
 	cd ${temp_root_dir}/${buildroot_dir}
 	make ARCH=arm CROSS_COMPILE=${cross_compiler}- clean > /dev/null 2>&1
 }
@@ -280,7 +290,7 @@ copy_linux(){
 	cp ${temp_root_dir}/${linux_dir}/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano-with-lcd.dtb ${temp_root_dir}/output/
 	mkdir -p ${temp_root_dir}/output/modules/
 	cp -rf ${temp_root_dir}/${linux_dir}/mod_output/lib ${temp_root_dir}/output/modules/
-	
+
 }
 copy_buildroot(){
 	cp -r ${temp_root_dir}/${buildroot_dir}/buildroot-2017.08/output/target ${temp_root_dir}/output/rootfs/
@@ -333,19 +343,19 @@ pack_tf_normal_size_img(){
 	rm $_IMG_FILE
 	dd if=/dev/zero of=$_IMG_FILE bs=1M count=$_IMG_SIZE
 	if [ $? -ne 0 ]
-	then 
+	then
 		echo  "getting error in creating dd img!"
 	    	exit
 	fi
 	_LOOP_DEV=$(sudo losetup -f)
 	if [ -z $_LOOP_DEV ]
-	then 
+	then
 		echo  "can not find a loop device!"
 		exit
 	fi
 	sudo losetup $_LOOP_DEV $_IMG_FILE
 	if [ $? -ne 0 ]
-	then 
+	then
 		echo  "dd img --> $_LOOP_DEV error!"
 		sudo losetup -d $_LOOP_DEV >/dev/null 2>&1 && exit
 	fi
@@ -362,7 +372,7 @@ EOT
 	sudo mkfs.vfat ${_LOOP_DEV}p1 ||exit
 	sudo mkfs.ext4 ${_LOOP_DEV}p2 ||exit
 	if [ $? -ne 0 ]
-	then 
+	then
 		echo  "error in creating partitions"
 		sudo losetup -d $_LOOP_DEV >/dev/null 2>&1 && exit
 		#sudo partprobe $_LOOP_DEV >/dev/null 2>&1 && exit
@@ -374,7 +384,7 @@ EOT
 	_UBOOT_FILE=${temp_root_dir}/output/u-boot-sunxi-with-spl.bin
 	sudo dd if=$_UBOOT_FILE of=$_LOOP_DEV bs=1024 seek=8
 	if [ $? -ne 0 ]
-	then 
+	then
 		echo  "writing u-boot error!"
 		sudo losetup -d $_LOOP_DEV >/dev/null 2>&1 && exit
 		#sudo partprobe $_LOOP_DEV >/dev/null 2>&1 && exit
@@ -402,9 +412,9 @@ EOT
         sudo mkdir -p ${temp_root_dir}/output/p2/lib/modules/${_kernel_mod_dir_name}/ &&\
         sudo cp -r $_MOD_FILE/*  ${temp_root_dir}/output/p2/lib/modules/${_kernel_mod_dir_name}/
         echo "--->modules done~"
-        
+
         if [ $? -ne 0 ]
-        then 
+        then
 		echo "copy files error! "
 		sudo losetup -d $_LOOP_DEV >/dev/null 2>&1
 		sudo umount ${_LOOP_DEV}p1  ${_LOOP_DEV}p2 >/dev/null 2>&1
@@ -415,7 +425,7 @@ EOT
 	sleep 2
 	sudo umount ${temp_root_dir}/output/p1 ${temp_root_dir}/output/p2  && sudo losetup -d $_LOOP_DEV
 	if [ $? -ne 0 ]
-	then 
+	then
 		echo  "umount or losetup -d error!!"
 		exit
 	fi
@@ -434,17 +444,23 @@ build(){
 	clean_log
 	echo "clean output dir ..."
 	clean_output_dir
+
+	echo "build_uboot ..."
 	build_uboot
 	echo "copy uboot ..."
 	copy_uboot
+
+	echo "build linux"
 	build_linux
 	echo "copy linux ..."
 	copy_linux
+
+	echo "build buildroot"
 	build_buildroot
 	echo "copy buildroot ..."
 	copy_buildroot
-	
-	
+
+
 }
 if [ "${1}" = "" ] && [ ! "${1}" = "nano_spiflash" ] && [ ! "${1}" = "nano_tf" ] && [ ! "${1}" = "pull_all" ]; then
 	echo "Usage: build.sh [nano_spiflash | nano_tf | pull_all | clean]"；
@@ -494,4 +510,3 @@ fi
 
 sleep 1
 echo "build ok"
-

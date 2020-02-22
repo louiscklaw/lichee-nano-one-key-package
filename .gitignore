@@ -1,0 +1,7 @@
+buildroot-*
+Lichee-Pi-*
+output
+toolchain
+**/*.log
+*history
+.wget-hsts
