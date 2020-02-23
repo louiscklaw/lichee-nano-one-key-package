@@ -1,7 +1,11 @@
 # README.md
 
 ```
+➜ pwd
+/home/logic/_del/lichee-nano-one-key-package
+
 docker run -it -v $PWD:/root ubuntu bash
+cd /root
 ./init.sh
 ```
 
@@ -35,7 +39,9 @@ connect Ch340 usb cable
 look minicom, the boot message prompts
 boot to bootstrap (press a key when countdown)
 
-MISSING sunxi-fel erase spi command
+sunxi-fel erase spi command
+
+`sf probe 0;sf erase 0 0x100000;reset`
 
 MISSING dmesg message
 
@@ -54,3 +60,8 @@ USB device 003:025   Allwinner F1C100s
 ```
 
 done
+
+### config files location
+uboot
+zImage
+rootfs

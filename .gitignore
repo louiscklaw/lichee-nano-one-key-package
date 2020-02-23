@@ -5,3 +5,6 @@ toolchain
 **/*.log
 *history
 .wget-hsts
+*/**/*.dtb
+
+linux_ws/linux/

@@ -49,13 +49,13 @@
 
             partition@100000 {
                 label = "dtb";
-                reg = <0x100000 0x10000>;
+                reg = <0x100000 0x110000>;
                 read-only;
             };
 
             partition@110000 {
                 label = "kernel";
-                reg = <0x110000 0x400000>;
+                reg = <0x110000 0x510000>;
                 read-only;
             };
 
