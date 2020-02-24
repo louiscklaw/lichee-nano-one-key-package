@@ -19,6 +19,8 @@ cd ..
 
 cd /home/logic/_del/lichee-nano-one-key-package
 sync
+
 sudo rm /mnt/2/rootfs.tar
 sync
+
 sudo umount /dev/sdb{1,2}
