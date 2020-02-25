@@ -4,6 +4,8 @@ printf "\nstart building rootfs\n"
 
 export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH
 
+sudo rm -rf ../output/rootfs.tar
+
 # wget https://buildroot.org/downloads/buildroot-2017.08.tar.gz
 # tar xvf buildroot-2017.08.tar.gz
 # cd buildroot-2017.08/

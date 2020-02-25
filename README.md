@@ -79,3 +79,7 @@ rootfs
 
 ### ref
 https://whycan.cn/t_2002.html#p13479
+
+
+### key files
+linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts

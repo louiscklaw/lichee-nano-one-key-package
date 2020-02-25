@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 # rm -rf linux
-# git clone --depth=1 -b f1c100s-480272lcd-test https://github.com/Icenowy/linux.git
+git clone --depth=1 -b f1c100s-480272lcd-test https://github.com/Icenowy/linux.git
 
 export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH
 
-cp .config.origional linux/.config
+# cp .config.origional linux/.config
 
 # cd linux
 # make ARCH=arm menuconfig

@@ -11,7 +11,7 @@ apt-get install -y rsync cpio
 
 apt-get install -y mtd-utils
 apt-get install -y linux-headers-$(uname -r)
-
+apt-get install -y vim
 
 # for sunxi fel
 # apt-get install -y build-essential
