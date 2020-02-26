@@ -12,16 +12,34 @@ sudo rm -rf ../output/rootfs.tar
 # make menuconfig
 
 
-cp .config.spi_try buildroot-2017.08/.config
+# cp .config.spi_try buildroot-2017.08/.config
 
 cd buildroot-2017.08
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- clean
+  # printf "\ncleaning...\n"
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- clean -j20
+
+  printf "\ncompile new copy\n"
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
 cd ..
 
+printf "\ncheck new file exists ?\n"
 ls -lh buildroot-2017.08/output/images/rootfs.tar
 
 printf "\nupdate rootfs.tar in output directory\n"
 cp buildroot-2017.08/output/images/rootfs.tar ../output
+cp buildroot-2017.08/.config .config_spi
 
-cp buildroot-2017.08/.config .config.spi_try
+
+# goto project root directory
+cd ..
+
+cd output
+
+  sudo rm -rf ./rootfs
+  sudo rm -rf ./jffs2.img
+
+  mkdir -p rootfs
+
+  sudo tar xf rootfs.tar -C ./rootfs
+  sudo rm rootfs.tar
+cd ..

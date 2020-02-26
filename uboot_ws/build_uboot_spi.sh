@@ -19,7 +19,7 @@ cd u-boot
 
   # make ARCH=arm menuconfig
   # cp ./.config ../.config_spi
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j7
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6
 
   # list output file
   printf "\nlist output file\n"

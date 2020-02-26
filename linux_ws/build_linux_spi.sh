@@ -13,6 +13,10 @@ export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/
 
 sudo rm -rf ../output/zImage
 sudo rm -rf ../output/suniv-f1c100s-licheepi-nano.dtb
+sudo rm -rf ../output/esp8089.ko
+
+printf "\nlist rootfs modules directory before build\n"
+ls -l ../output/rootfs/lib
 
 cd linux
   printf "\nclean workspace\n"
@@ -24,15 +28,24 @@ cd linux
   rm -rf arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
   ls -lh arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
 
+  rm -rf drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
+  ls -lh drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
+
   printf "\nbuild linux\n"
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j7
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6
 
   printf "\nlist output zImage\n"
   ls -lh arch/arm/boot/zImage
 
   # /home/logic/_del/lichee-nano-one-key-package/linux_ws/linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
   printf "\nbuild dts\n"
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- dtbs -j7
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- dtbs -j6
+
+  printf "\nmodules\n"
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules -j6
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules_install -j6 INSTALL_MOD_PATH=../../output/rootfs/
+
+
 
 cd ..
 
@@ -41,5 +54,8 @@ md5sum linux/arch/arm/boot/zImage
 
 cp linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb ../output
 md5sum linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
+
+cp linux/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko ../output
+md5sum linux/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
 
 exit 0
