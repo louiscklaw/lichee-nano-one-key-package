@@ -20,6 +20,8 @@ cd buildroot-2017.08
 
   printf "\ncompile new copy\n"
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
+
+
 cd ..
 
 printf "\ncheck new file exists ?\n"
@@ -27,12 +29,14 @@ ls -lh buildroot-2017.08/output/images/rootfs.tar
 
 printf "\nupdate rootfs.tar in output directory\n"
 cp buildroot-2017.08/output/images/rootfs.tar ../output
-cp buildroot-2017.08/.config .config_spi
 
+printf "\ncompile complete, backup current config\n"
+cp ./buildroot-2017.08/.config ../.config_spi_backup
 
 # goto project root directory
 cd ..
 
+printf "\nmove rootfs.tar to output directory\n"
 cd output
 
   sudo rm -rf ./rootfs
