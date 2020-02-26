@@ -28,8 +28,8 @@ ls -lh output/zImage
 sudo sunxi-fel -p spiflash-write 0x0110000 output/zImage
 
 
-printf "\nsize of generated rootfs tar file\n"
-ls -lh output/rootfs.tar
+# printf "\nsize of generated rootfs tar file\n"
+# ls -lh output/rootfs.tar
 printf "\nsize of rootfs image file\n"
 ls -lh output/jffs2.img
 sudo sunxi-fel -p spiflash-write 0x0510000 output/jffs2.img

@@ -10,3 +10,5 @@ toolchain
 linux_ws/linux/
 
 flashimg.bin
+
+esp8089_ws

@@ -13,7 +13,7 @@ export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/
 
 sudo rm -rf ../output/zImage
 sudo rm -rf ../output/suniv-f1c100s-licheepi-nano.dtb
-sudo rm -rf ../output/esp8089.ko
+# sudo rm -rf ../output/esp8089.ko
 
 printf "\nlist rootfs modules directory before build\n"
 ls -l ../output/rootfs/lib
@@ -28,8 +28,8 @@ cd linux
   rm -rf arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
   ls -lh arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
 
-  rm -rf drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
-  ls -lh drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
+  # rm -rf drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
+  # ls -lh drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
 
   printf "\nbuild linux\n"
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6
@@ -43,9 +43,13 @@ cd linux
 
   printf "\nmodules\n"
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules -j6
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules_install -j6 INSTALL_MOD_PATH=../../output/rootfs/
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules_install -j6 INSTALL_MOD_PATH=../../output/rootfs/
 
-
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6 INSTALL_MOD_PATH=../../output/rootfs/ modules
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6 INSTALL_MOD_PATH=../../output/rootfs/ modules_install
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=out modules
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=out modules_install
 
 cd ..
 
@@ -55,7 +59,9 @@ md5sum linux/arch/arm/boot/zImage
 cp linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb ../output
 md5sum linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
 
-cp linux/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko ../output
-md5sum linux/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
+cp -r ../esp8089_ws/esp8089-nano-4.15/firmware ../output/rootfs/lib/firmware
+
+# cp linux/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko ../output
+# md5sum linux/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
 
 exit 0
