@@ -2,8 +2,8 @@
 
 set -e
 
-# BUILD_ROOT_VER=buildroot-2019.11.1
-BUILD_ROOT_VER=buildroot-2017.08
+BUILD_ROOT_VER=buildroot-2019.11.1
+# BUILD_ROOT_VER=buildroot-2017.08
 
 printf "\nstart building rootfs\n"
 
