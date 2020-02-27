@@ -86,3 +86,36 @@ linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
 
 
 `insmod /lib/modules/4.15.0-rc8-licheepi-nano\+/kernel/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko`
+
+`insmod /lib/modules/5.2.0-licheepi-nano\+/kernel/drivers/net/wireless/esp8089_driver/esp8089.ko`
+`modprobe esp8089 config=crystal_26M_en=2`
+
+### getting wifi to work
+
+总结一下以前帖子里填过的坑，因为最近想用一下wifi，发现忘记怎么设置了。
+之前帖子链接 https://whycan.cn/t_2091.html 。
+
+这里我只记录连接路由的设置步骤：
+1.配置/etc/wpa_supplicant.conf
+
+```
+ctrl_interface=/var/run/wpa_supplicant
+<!-- ctrl_interface_group=wheel -->
+update_config=1
+ap_scan=1
+
+network={
+        ssid="logicdebug"
+        #psk="1233211234567"
+        psk=6f4cf9c657d6d4a5a65bc0f86a70611e01129cc799bc26308c3e826693763bba
+}
+```
+
+2.执行wpa_supplicant -i wlan0 -D wext -c /etc/wpa_supplicant.conf -B
+`wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf`
+`wpa_supplicant -i wlan0 -D wext -c /etc/wpa_supplicant.conf -B`
+
+ifconfig wlan0 192.168.99.100 netmask 255.255.255.0 up
+route add default gw 192.168.99.1
+
+3.udhcpc -i wlan0

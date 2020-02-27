@@ -51,5 +51,5 @@ cd output
   mkdir -p rootfs
 
   sudo tar xf rootfs.tar -C ./rootfs
-  sudo rm rootfs.tar
+  # sudo rm rootfs.tar
 cd ..

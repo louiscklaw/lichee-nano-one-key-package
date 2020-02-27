@@ -15,43 +15,43 @@ LINUX_VER=linux_5_2
 # # copy back to save the updated configuration file
 # cp linux/.config .config.spi.origional
 
-sudo rm -rf ../output/zImage
-sudo rm -rf ../output/suniv-f1c100s-licheepi-nano.dtb
-# sudo rm -rf ../output/esp8089.ko
+# sudo rm -rf ../output/zImage
+# sudo rm -rf ../output/suniv-f1c100s-licheepi-nano.dtb
 
 printf "\nlist rootfs modules directory before build\n"
 ls -l ../output/rootfs/lib
 
 cd $LINUX_VER
-  printf "\nclean workspace\n"
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j8 clean
+  # printf "\nclean workspace\n"
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j8 clean
 
-  rm -rf arch/arm/boot/zImage
-  ls -lh arch/arm/boot/zImage
+  # rm -rf arch/arm/boot/zImage
+  # ls -lh arch/arm/boot/zImage
 
-  rm -rf arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
-  ls -lh arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
+  # rm -rf arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
+  # ls -lh arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
 
-  # rm -rf drivers/net/wireless/esp8089_driver/esp8089.ko
-  # ls -lh drivers/net/wireless/esp8089_driver/esp8089.ko
+  # # rm -rf drivers/net/wireless/esp8089_driver/esp8089.ko
+  # # ls -lh drivers/net/wireless/esp8089_driver/esp8089.ko
 
-  printf "\nbuild linux\n"
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6
+  # printf "\nbuild linux\n"
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6
 
-  printf "\nlist output zImage\n"
-  ls -lh arch/arm/boot/zImage
+  # printf "\nlist output zImage\n"
+  # ls -lh arch/arm/boot/zImage
 
-  # /home/logic/_del/lichee-nano-one-key-package/linux_ws/linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
-  printf "\nbuild dts\n"
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- dtbs -j6
+  # # /home/logic/_del/lichee-nano-one-key-package/linux_ws/linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
+  # printf "\nbuild dts\n"
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- dtbs -j6
 
   printf "\nmodules\n"
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules -j6
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules_install -j6 INSTALL_MOD_PATH=../../output/rootfs/
 
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6 INSTALL_MOD_PATH=../../output/rootfs/ modules
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6 INSTALL_MOD_PATH=../../output/rootfs/ modules_install
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6 INSTALL_MOD_PATH=../../output/esp8089/ modules
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6 INSTALL_MOD_PATH=../../output/esp8089/ modules_install
+
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=out modules
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=out modules_install
 
@@ -64,7 +64,8 @@ md5sum $LINUX_VER/arch/arm/boot/zImage
 cp $LINUX_VER/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb ../output
 md5sum $LINUX_VER/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
 
-cp -r ../esp8089_ws/esp8089_driver/firmware ../output/rootfs/lib/firmware
+# cp -r ../esp8089_ws/esp8089_driver/firmware ../output/rootfs/lib/firmware
+# rsync -a -L ../output/esp8089/ ../output/rootfs
 
 # cp $LINUX_VER/drivers/net/wireless/esp8089_driver/esp8089.ko ../output
 # md5sum $LINUX_VER/drivers/net/wireless/esp8089_driver/esp8089.ko
