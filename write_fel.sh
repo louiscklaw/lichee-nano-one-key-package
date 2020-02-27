@@ -12,29 +12,29 @@ sudo sunxi-fel spiflash-info
 # # # rootfs
 printf "\nprepare rootfs... \n"
 cd output
-  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x300000 -d ./rootfs/ -o jffs2.img
+  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x500000 -d ./rootfs/ -o jffs2.img
 cd ..
 
 printf "\nprepare complete... \n"
 
 # # # uboot
 ls -lh output/u-boot-sunxi-with-spl.bin
-sudo sunxi-fel -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
+sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
 # # # dtb
 ls -lh output/suniv-f1c100s-licheepi-nano.dtb
-sudo sunxi-fel -p spiflash-write 0x0100000 output/suniv-f1c100s-licheepi-nano.dtb
+sudo sunxi-fel -v -p spiflash-write 0x0100000 output/suniv-f1c100s-licheepi-nano.dtb
 # # # kernel
 ls -lh output/zImage
-sudo sunxi-fel -p spiflash-write 0x0110000 output/zImage
+sudo sunxi-fel -v -p spiflash-write 0x0110000 output/zImage
 
 
 # printf "\nsize of generated rootfs tar file\n"
 # ls -lh output/rootfs.tar
 printf "\nsize of rootfs image file\n"
 ls -lh output/jffs2.img
-sudo sunxi-fel -p spiflash-write 0x0610000 output/jffs2.img
+sudo sunxi-fel -v -p spiflash-write 0x0610000 output/jffs2.img
 # # # jffs2
-# # sudo sunxi-fel -p spiflash-write 0x960000 jffs2.img
+# # sudo sunxi-fel -v -p spiflash-write 0x960000 jffs2.img
 
 
 # sf probe 0 50000000

@@ -83,3 +83,6 @@ https://whycan.cn/t_2002.html#p13479
 
 ### key files
 linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
+
+
+`insmod /lib/modules/4.15.0-rc8-licheepi-nano\+/kernel/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko`

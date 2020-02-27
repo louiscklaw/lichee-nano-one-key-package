@@ -6,7 +6,8 @@
 export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH
 
 LINUX_VER=linux_5_2
-LINUX_VER=linux
+# LINUX_VER=linux_4_15
+
 
 # cp .config.spi.origional linux/.config
 
@@ -31,8 +32,8 @@ cd $LINUX_VER
   rm -rf arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
   ls -lh arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
 
-  # rm -rf drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
-  # ls -lh drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
+  # rm -rf drivers/net/wireless/esp8089_driver/esp8089.ko
+  # ls -lh drivers/net/wireless/esp8089_driver/esp8089.ko
 
   printf "\nbuild linux\n"
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6
@@ -63,9 +64,9 @@ md5sum $LINUX_VER/arch/arm/boot/zImage
 cp $LINUX_VER/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb ../output
 md5sum $LINUX_VER/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
 
-cp -r ../esp8089_ws/esp8089-nano-4.15/firmware ../output/rootfs/lib/firmware
+cp -r ../esp8089_ws/esp8089_driver/firmware ../output/rootfs/lib/firmware
 
-# cp $LINUX_VER/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko ../output
-# md5sum $LINUX_VER/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
+# cp $LINUX_VER/drivers/net/wireless/esp8089_driver/esp8089.ko ../output
+# md5sum $LINUX_VER/drivers/net/wireless/esp8089_driver/esp8089.ko
 
 exit 0
