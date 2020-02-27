@@ -2,7 +2,8 @@
 
 set -e
 
-BUILD_ROOT_VER=buildroot-2019.11.1
+# BUILD_ROOT_VER=buildroot-2019.11.1
+BUILD_ROOT_VER=buildroot-2017.08
 
 printf "\nstart building rootfs\n"
 
@@ -21,7 +22,7 @@ sudo rm -rf ../output/rootfs.tar
 
 cd $BUILD_ROOT_VER
   # printf "\ncleaning...\n"
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- clean -j20
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- clean -j20
 
   printf "\ncompile new copy\n"
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-

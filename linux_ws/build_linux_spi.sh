@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-# rm -rf linux
+# rm -rf $LINUX_VER
 # git clone --depth=1 -b f1c100s-480272lcd-test https://github.com/Icenowy/linux.git
 
 export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH
+
+LINUX_VER=linux_5_2
+LINUX_VER=linux
 
 # cp .config.spi.origional linux/.config
 
@@ -18,7 +21,7 @@ sudo rm -rf ../output/suniv-f1c100s-licheepi-nano.dtb
 printf "\nlist rootfs modules directory before build\n"
 ls -l ../output/rootfs/lib
 
-cd linux
+cd $LINUX_VER
   printf "\nclean workspace\n"
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j8 clean
 
@@ -51,17 +54,18 @@ cd linux
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=out modules
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=out modules_install
 
+  cp ./.config ../.config_spi_backup
 cd ..
 
-cp linux/arch/arm/boot/zImage ../output
-md5sum linux/arch/arm/boot/zImage
+cp $LINUX_VER/arch/arm/boot/zImage ../output
+md5sum $LINUX_VER/arch/arm/boot/zImage
 
-cp linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb ../output
-md5sum linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
+cp $LINUX_VER/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb ../output
+md5sum $LINUX_VER/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
 
 cp -r ../esp8089_ws/esp8089-nano-4.15/firmware ../output/rootfs/lib/firmware
 
-# cp linux/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko ../output
-# md5sum linux/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
+# cp $LINUX_VER/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko ../output
+# md5sum $LINUX_VER/drivers/net/wireless/esp8089-nano-4.15/esp8089.ko
 
 exit 0

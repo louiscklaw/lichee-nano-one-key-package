@@ -7,7 +7,7 @@ toolchain
 .wget-hsts
 */**/*.dtb
 
-linux_ws/linux/
+linux_ws/linux*/
 
 flashimg.bin
 

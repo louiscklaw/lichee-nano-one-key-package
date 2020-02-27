@@ -25,6 +25,8 @@ cd u-boot
   printf "\nlist output file\n"
   ls -lh u-boot-sunxi-with-spl.bin
 
+  cp ./.config ../.config_spi_backup
+
 cd ..
 
 cp u-boot/u-boot-sunxi-with-spl.bin ../output
