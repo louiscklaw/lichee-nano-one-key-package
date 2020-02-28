@@ -23,6 +23,13 @@ jobs:
       script:
         - echo "after build"
 
+    - stage: Merge
+      name: "merge to develop"
+      script:
+        - echo $TRAVIS_BUILD_STAGE_NAME
+        - if [ "$TRAVIS_BUILD_STAGE_NAME" = "Merge" ]; then ./.travis/merge_if_success.sh; fi
+
+
 env:
   global:
     - secure: "Z6/Qcqqj9GWARJR9YSBluBEr9AinQBR4kC+k/uZ6nnHZXP2LzoF/tIaKzLU3yl379HjF8JTOfyEzwSreyHLhBT7y4AGHcuw4kx7NvqQqlBzuo4VQ/dp0IBu+d2qIJqTiD56I4un/zV+jYUVinjACg0Jl9YfDB2ZY8Pg9dG86aoKR2LWBCjVthmRUHqq2A5+ErPr8K4ass1oijqqGbHr8VX4y2EhqkT47fQTWM+6VgrP0aG6vF8Z1/aHJnni8ACMN47SLR+VNBCzuUEqmf74ZPz50RxVBWNvUxE1VbfcTEpeAx5A+YYjqOaWL7D3dN9Ay23yob7n+dgkzUgAa9MMf8vxeyN0uXXqASAu5Ex65IecKfdYheNHSrv4scF1K0ypymmoF9IuYd1HM3tJ93EUWz1yB19p28VFl86V/TPQNkKlfYaQNHbgaxY1pfxc7I0oM3SGOQN72qU7i7RPfmSva7nDEpUXRwoJH7ZU22X/ZoN5wEaoj95lD9gUGU+Dg3FhBQQzU5vNsO/GbNyxkNNIixgnd4xR2G2QBFgvWDdrAGogVcwBFZ2tFDxxmqjtqokjksDs2VLfMoK0OM3bHOuyqB8gwgGU7Soh/VliazeGbZ2bChUAGPkUnvmCJCGh7jlfAMUvV9IYkfF2xEfSeBvkWtcOhBI+TpplZ1j0v+RJXow4="
