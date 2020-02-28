@@ -18,9 +18,10 @@ jobs:
       name: "build image"
       script:
         - bash ./build.sh
-
-after_success:
-  - echo "after success"
+    - stage: Build
+      name: "build image"
+      script:
+        - echo "after build"
 
 env:
   global:
