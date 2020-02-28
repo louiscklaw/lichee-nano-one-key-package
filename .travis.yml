@@ -18,7 +18,7 @@ jobs:
       name: "build image"
       script:
         - bash ./build.sh
-    - stage: Build
+    - stage: after_build
       name: "build image"
       script:
         - echo "after build"
