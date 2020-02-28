@@ -11,10 +11,10 @@ language: generic
 
 jobs:
   include:
-    - stage: Merge
-      name: "Helloworld"
+    - stage: Build
+      name: "build image"
       script:
-        - echo "dummy job for merging"
+        - bash ./build.sh
 
 after_success:
   - echo "after success"
