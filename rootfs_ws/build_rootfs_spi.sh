@@ -21,8 +21,8 @@ sudo rm -rf ../output/rootfs.tar
 # cp .config.spi_try $BUILD_ROOT_VER/.config
 
 cd $BUILD_ROOT_VER
-  # printf "\ncleaning...\n"
-  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- clean -j20
+  printf "\ncleaning...\n"
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- clean -j20
 
   printf "\ncompile new copy\n"
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-

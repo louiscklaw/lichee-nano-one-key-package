@@ -49,11 +49,18 @@ cd $LINUX_VER
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules_install -j6 INSTALL_MOD_PATH=../../output/rootfs/
 
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6
-  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6 INSTALL_MOD_PATH=../../output/esp8089/ modules
-  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j6 INSTALL_MOD_PATH=../../output/esp8089/ modules_install
 
-  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=out modules
-  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=out modules_install
+  OUT=../../output/esp8089_out
+
+  rm -rf $OUT
+  mkdir -p $OUT
+
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j INSTALL_MOD_PATH=$OUT modules
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j INSTALL_MOD_PATH=$OUT modules_install
+
+  # extra ?
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../../esp8089_ws/esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=$OUT modules
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../../esp8089_ws/esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=$OUT modules_install
 
   cp ./.config ../.config_spi_backup
 cd ..

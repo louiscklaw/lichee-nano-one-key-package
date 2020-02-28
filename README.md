@@ -1,5 +1,10 @@
 # README.md
 
+### travis build site
+https://travis-ci.com/louiscklaw/lichee-nano-one-key-package
+
+https://api.travis-ci.org/v3/job/6073028/log.txt
+
 ```
 pwd
 /home/logic/_del/lichee-nano-one-key-package
@@ -9,18 +14,12 @@ cd /root
 ./init.sh
 ```
 
-```
-cd /root
-./build.sh pull_all
-./build. nano_spiflash
-```
-
 ### NOTES:
-```
+<!-- ```
 ~/Downloads via ⬢ v12.16.1
 docker import licheepi-nano-docker-v1_0.tar
 sha256:bf31d3f16063cb99ecc9417853889bb6b44aa997d035a222efdb3c792141c351
-```
+``` -->
 
 ### CURRENT OUTSTANDING
 ```
