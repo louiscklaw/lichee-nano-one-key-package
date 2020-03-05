@@ -1,0 +1,20 @@
+#
+# Ubuntu Dockerfile
+#
+# https://github.com/dockerfile/ubuntu
+#
+
+# Pull base image.
+FROM ubuntu
+
+# Define working directory.
+WORKDIR /root
+
+# Define default command.
+CMD ["bash"]
+
+# Set environment variables.
+ENV HOME /root
+
+# Set to let scripts know working inside docker container
+ENV DOCKER_ENVIRONEMNT 1
