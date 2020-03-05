@@ -5,3 +5,6 @@ toolchain
 **/*.log
 *history
 .wget-hsts
+
+linux_ws/linux_5_2
+esp8089_ws/esp8089

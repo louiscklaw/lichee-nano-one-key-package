@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -xe
 
 BUILD_ROOT_VER=buildroot-2019.11.1
 # BUILD_ROOT_VER=buildroot-2017.08
@@ -12,9 +12,9 @@ export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/
 sudo rm -rf ../output/rootfs.tar
 
 # wget https://buildroot.org/downloads/buildroot-2017.08.tar.gz
-# wget https://buildroot.org/downloads/buildroot-2019.11.1.tar.gz
-# tar xvf buildroot-2017.08.tar.gz
-# cd buildroot-2017.08/
+wget https://buildroot.org/downloads/$BUILD_ROOT_VER.tar.gz
+tar xvf $BUILD_ROOT_VER.tar.gz
+# cd buildroot-2019.11.1/
 # make menuconfig
 
 
