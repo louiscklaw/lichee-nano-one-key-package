@@ -5,6 +5,9 @@ https://travis-ci.com/louiscklaw/lichee-nano-one-key-package
 
 https://api.travis-ci.org/v3/job/6073028/log.txt
 
+### references:
+esp8089_ws/esp8089_licheepi => https://github.com/Lichee-Pi/esp8089.git
+
 ```
 pwd
 /home/logic/_del/lichee-nano-one-key-package
