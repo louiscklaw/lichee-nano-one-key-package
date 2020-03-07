@@ -54,3 +54,31 @@ USB device 003:025   Allwinner F1C100s
 ```
 
 done
+
+
+
+### flash log
+```
+ls: cannot access 'flashimg.bin': No such file or directory
+16+0 records in
+16+0 records out
+16777216 bytes (17 MB, 16 MiB) copied, 0.00937611 s, 1.8 GB/s
+984+0 records in
+984+0 records out
+1007616 bytes (1.0 MB, 984 KiB) copied, 0.00278339 s, 362 MB/s
+8+1 records in
+8+1 records out
+9134 bytes (9.1 kB, 8.9 KiB) copied, 9.1083e-05 s, 100 MB/s
+4273+1 records in
+4273+1 records out
+4375744 bytes (4.4 MB, 4.2 MiB) copied, 0.0132219 s, 331 MB/s
+cc6a0a357bd08731bcdbc1072d6c0f4b  flashimg.bin
+4160+0 records in
+4160+0 records out
+4259840 bytes (4.3 MB, 4.1 MiB) copied, 0.0150049 s, 284 MB/s
+68cfdc5677ca7e90c546b8a6c813be11  flashimg.bin
+-rw-r--r-- 1 root root 16M Mar  7 17:13 flashimg.bin
+USB device 003:090   Allwinner F1C100s
+Manufacturer: Winbond (EFh), model: 40h, size: 16777216 bytes.
+100% [================================================] 16777 kB,   95.2 kB/s
+```

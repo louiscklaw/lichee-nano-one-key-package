@@ -38,7 +38,9 @@ cd output
 
   mkdir -p rootfs
   sudo tar xf $YOUR_ROOTFS_FILE -C ./rootfs
-  # cp -r $YOUR_MOD_FILE  rootfs/lib/modules/
+
+  # copy modules rtl8723
+  # sudo cp -r /home/logic/_del/lichee-nano-one-key-package/linux_ws/linux_5_2/drivers/staging/rtl8723bs/r8723bs.ko rootfs/root/r8723bs.ko
 
   # # http://manpages.ubuntu.com/manpages/trusty/man1/mkfs.jffs2.1.html
   # [ -s,--pagesize=SIZE ] [ -e,--eraseblock=SIZE ]
@@ -50,7 +52,7 @@ cd output
 
   ls -lh $YOUR_IMG_FILE
 
-  md5sum *
+  # md5sum *
 cd ..
 
 sudo sunxi-fel list
