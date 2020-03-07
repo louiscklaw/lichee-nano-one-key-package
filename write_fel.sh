@@ -4,6 +4,7 @@
 # sf probe 0 50000000; sf read 0x80c00000 0x0100000 0x10000; sf read 0x80008000 0x0110000 0x400000; bootz 0x80008000 - 0x80c00000
 # # sf probe 0;sf erase 0 0x100000;reset
 # #
+set -xe
 
 sudo sunxi-fel list
 sudo sunxi-fel spiflash-info
@@ -16,33 +17,35 @@ cd output
 
   # in module : mkdir -p /lib/firmware/rtlwifi
   # in module : cp rtl8723bs_nic.bin /lib/firmware/rtlwifi/
-  sudo cp -r /home/logic/_del/lichee-nano-one-key-package/rtl8723bs_ws/rtl8723bs_nic.bin ./rootfs/root/rtl8723bs_nic.bin
+  sudo mkdir -p ./rootfs/lib/firmware/rtlwifi
+  sudo cp -r /home/logic/_del/lichee-nano-one-key-package/rtl8723bs_ws/rtl8723bs_nic.bin ./rootfs/lib/firmware/rtlwifi/rtl8723bs_nic.bin
 
   sudo cp -r /home/logic/_del/lichee-nano-one-key-package/root_home/wpa_supplicant.conf ./rootfs/root/wpa_supplicant.conf
 
-  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x500000 -d ./rootfs/ -o jffs2.img
+  # sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x500000 -d ./rootfs/ -o jffs2.img
+  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x9F0000 -d ./rootfs/ -o jffs2.img
 cd ..
 
 printf "\nprepare complete... \n"
 
-# # # uboot
-# ls -lh output/u-boot-sunxi-with-spl.bin
-# sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
-# # # dtb
-# ls -lh output/suniv-f1c100s-licheepi-nano.dtb
-# sudo sunxi-fel -v -p spiflash-write 0x0100000 output/suniv-f1c100s-licheepi-nano.dtb
-# # # kernel
-ls -lh output/zImage
-sudo sunxi-fel -v -p spiflash-write 0x0110000 output/zImage
 
-
-# printf "\nsize of generated rootfs tar file\n"
-# ls -lh output/rootfs.tar
-printf "\nsize of rootfs image file\n"
+printf "\nsize of files\n"
+ls -lh output/u-boot-sunxi-with-spl.bin
+ls -lh output/suniv-f1c100s-licheepi-nano.dtb
 ls -lh output/jffs2.img
+ls -lh output/zImage
 
-printf "\nsize of expanded root directory\n"
 sudo du -sh output/rootfs
+
+
+# # # uboot
+sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
+
+# # # dtb
+sudo sunxi-fel -v -p spiflash-write 0x0100000 output/suniv-f1c100s-licheepi-nano.dtb
+
+# # # kernel
+sudo sunxi-fel -v -p spiflash-write 0x0110000 output/zImage
 
 sudo sunxi-fel -v -p spiflash-write 0x0610000 output/jffs2.img
 # # # jffs2
