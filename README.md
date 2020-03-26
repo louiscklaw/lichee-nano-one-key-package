@@ -7,8 +7,17 @@ docker run -it -v $PWD:/root logickee/ubuntu bash
 ```
 
 ```
-dts file: /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/linux_5_2/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
+dts file:
+/home/logic/_workspace/lichee-nano-one-key-package/linux_ws/linux_5_2/arch/arm/boot/dts/suniv-f1c100s.dtsi
+/home/logic/_workspace/lichee-nano-one-key-package/linux_ws/linux_5_2/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
 
+```
+
+```
+command to test serial port
+
+cat /dev/ttyS1 & cat > /dev/ttyS1
+cat /dev/ttyS2 & cat > /dev/ttyS2
 ```
 
 ```

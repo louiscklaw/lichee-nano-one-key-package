@@ -7,6 +7,7 @@ export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/
 LINUX_VER=linux_5_2
 
 
+cp ./dts_file/suniv-f1c100s.dtsi ./linux_5_2/arch/arm/boot/dts/suniv-f1c100s.dtsi
 cp ./dts_file/suniv-f1c100s-licheepi-nano.dts ./linux_5_2/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
 
 cd $LINUX_VER
