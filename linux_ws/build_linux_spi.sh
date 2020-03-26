@@ -56,15 +56,15 @@ cd $LINUX_VER
 
   # # /home/logic/_del/lichee-nano-one-key-package/linux_ws/linux/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
   # printf "\nbuild dts\n"
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- dtbs -j6
+  # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- dtbs -j6
 
 cd ..
 
 cp $LINUX_VER/arch/arm/boot/zImage ../output
 md5sum $LINUX_VER/arch/arm/boot/zImage
 
-cp $LINUX_VER/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb ../output
-md5sum $LINUX_VER/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
+# cp $LINUX_VER/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb ../output
+# md5sum $LINUX_VER/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dtb
 
 
 
