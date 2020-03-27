@@ -158,7 +158,7 @@
 
 			partition@540000 {
 				label = "rootfs";
-				reg = <0x540000 0xAC0000>;
+				reg = <0x540000 0x8F0000>;
 			};
 		};
 	};
