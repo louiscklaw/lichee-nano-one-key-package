@@ -3,7 +3,8 @@
 set -xe
 
 apt-get update
-apt-get install -y tmux sudo git wget curl rsync cpio xz-utils
+apt-get install -y tmux sudo git wget curl rsync
+apt-get install -y cpio xz-utils
 
 apt-get install -y autoconf automake libtool gettext
 apt-get install -y make gcc g++ swig python-dev bc python u-boot-tools bison flex bc libssl-dev libncurses5-dev unzip mtd-utils
@@ -30,3 +31,5 @@ cd ../..
 export PATH=$PWD/toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH
 
 exit 0
+
+# done
