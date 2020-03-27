@@ -3,5 +3,5 @@
 set -xe
 
 cd /
-mkdir overlay
+mkdir -p /overlay
 mount -t jffs2 /dev/mtdblock4 /overlay
