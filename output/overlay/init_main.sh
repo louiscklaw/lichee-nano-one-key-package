@@ -15,4 +15,4 @@ sleep 10
 
 udhcpc -i wlan0
 
-# uhttpd -p 80 -h ./wwwroot
+uhttpd -p 80 -h /overlay/www

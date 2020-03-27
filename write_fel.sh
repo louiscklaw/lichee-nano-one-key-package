@@ -66,7 +66,7 @@ sudo du -sh output/rootfs
 # # # kernel
 # sudo sunxi-fel -v -p spiflash-write 0x0110000 output/zImage
 
-sudo sunxi-fel -v -p spiflash-write 0x0540000 output/rootfs.img
+# sudo sunxi-fel -v -p spiflash-write 0x0540000 output/rootfs.img
 
 sudo sunxi-fel -v -p spiflash-write 0x0E30000 output/userspace.img
 
