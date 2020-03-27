@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -xev
+
 insmod r8723bs.ko
 
 mkdir -p /lib/firmware/rtlwifi
@@ -13,4 +15,4 @@ sleep 10
 
 udhcpc -i wlan0
 
-# uhttpd -p 80 -h /overlay/wwwroot
+# uhttpd -p 80 -h ./wwwroot
