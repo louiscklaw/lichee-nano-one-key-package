@@ -4,9 +4,10 @@
 # sf probe 0 50000000; sf read 0x80c00000 0x0100000 0x10000; sf read 0x80008000 0x0110000 0x400000; bootz 0x80008000 - 0x80c00000
 # # sf probe 0;sf erase 0 0x100000;reset
 # #
-set -xe
+set -xev
 
 sudo sunxi-fel list
+
 sudo sunxi-fel spiflash-info
 
 
@@ -20,6 +21,8 @@ cd output
   sudo cp -r /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/linux_5_2/drivers/staging/rtl8723bs/r8723bs.ko ./overlay/r8723bs.ko
 
   sudo cp -r /home/logic/_workspace/lichee-nano-one-key-package/rtl8723bs_ws/rtl8723bs_nic.bin ./overlay/rtl8723bs_nic.bin
+
+  sudo cp ./overlay/init_overlay.sh /home/logic/_workspace/lichee-nano-one-key-package/output/rootfs/root
 
   # # in module : mkdir -p /lib/firmware/rtlwifi
   # # in module : cp rtl8723bs_nic.bin /lib/firmware/rtlwifi/
@@ -63,7 +66,7 @@ sudo du -sh output/rootfs
 # # # kernel
 # sudo sunxi-fel -v -p spiflash-write 0x0110000 output/zImage
 
-# sudo sunxi-fel -v -p spiflash-write 0x0540000 output/rootfs.img
+sudo sunxi-fel -v -p spiflash-write 0x0540000 output/rootfs.img
 
 sudo sunxi-fel -v -p spiflash-write 0x0E30000 output/userspace.img
 
