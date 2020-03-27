@@ -1,8 +1,8 @@
 # README.md
 
 ```
-docker build -f ./docker_lichee_builder.yml . -t logickee/ubuntu
-docker run -it -v $PWD:/root logickee/ubuntu bash
+docker build -f ./docker_lichee_builder.yml . -t logickee/licheepi-nano-build
+docker run -it -v $PWD:/root logickee/licheepi-nano-build bash
 ./init.sh
 ```
 
@@ -24,6 +24,10 @@ cat /dev/ttyS2 & cat > /dev/ttyS2
 cd /root
 ./build.sh pull_all
 ./build. nano_spiflash
+```
+
+```
+make ARCH=arm menuconfig
 ```
 
 ### NOTES:
