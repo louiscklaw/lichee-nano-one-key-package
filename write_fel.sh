@@ -16,7 +16,10 @@ cd output
   # clear workspace
 
   # rootfs
-  # sudo cp -r /home/logic/_del/lichee-nano-one-key-package/linux_ws/linux_5_2/drivers/staging/rtl8723bs/r8723bs.ko ./rootfs/root/r8723bs.ko
+  # FIXME: move to root
+  sudo cp -r /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/linux_5_2/drivers/staging/rtl8723bs/r8723bs.ko ./overlay/r8723bs.ko
+
+  sudo cp -r /home/logic/_workspace/lichee-nano-one-key-package/rtl8723bs_ws/rtl8723bs_nic.bin ./overlay/rtl8723bs_nic.bin
 
   # # in module : mkdir -p /lib/firmware/rtlwifi
   # # in module : cp rtl8723bs_nic.bin /lib/firmware/rtlwifi/
