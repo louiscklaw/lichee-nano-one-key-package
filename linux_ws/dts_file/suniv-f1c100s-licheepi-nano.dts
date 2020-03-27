@@ -160,6 +160,12 @@
 				label = "rootfs";
 				reg = <0x540000 0x8F0000>;
 			};
+
+      partition@E30000 {
+        label = "overlayfs";
+        reg = <0xE30000 0x1D0000>;
+      };
+
 		};
 	};
 };
