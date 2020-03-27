@@ -29,6 +29,7 @@ git clone -b nano-5.2-flash --depth=3 https://github.com/Lichee-Pi/linux.git  li
 
 cp .config_linux_5_2 ./linux_5_2/.config
 
+rm -rf $LINUX_VER/arch/arm/boot/zImage
 
 # cp ./dts_file/suniv-f1c100s-licheepi-nano.dts ./linux_5_2/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
 

@@ -8,8 +8,14 @@ docker run -it -v $PWD:/root logickee/licheepi-nano-build bash
 
 ```
 dts file:
+
+/home/logic/_workspace/lichee-nano-one-key-package/linux_ws/dts_file/suniv-f1c100s-licheepi-nano.dts
+
+
 /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/linux_5_2/arch/arm/boot/dts/suniv-f1c100s.dtsi
 /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/linux_5_2/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
+
+
 
 ```
 
