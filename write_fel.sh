@@ -10,47 +10,59 @@ sudo sunxi-fel list
 sudo sunxi-fel spiflash-info
 
 
-# # # rootfs
-printf "\nprepare rootfs... \n"
+# prepare rootfs...
+
 cd output
-  sudo cp -r /home/logic/_del/lichee-nano-one-key-package/linux_ws/linux_5_2/drivers/staging/rtl8723bs/r8723bs.ko ./rootfs/root/r8723bs.ko
+  # clear workspace
 
-  # in module : mkdir -p /lib/firmware/rtlwifi
-  # in module : cp rtl8723bs_nic.bin /lib/firmware/rtlwifi/
-  sudo mkdir -p ./rootfs/lib/firmware/rtlwifi
-  sudo cp -r /home/logic/_del/lichee-nano-one-key-package/rtl8723bs_ws/rtl8723bs_nic.bin ./rootfs/lib/firmware/rtlwifi/rtl8723bs_nic.bin
+  # rootfs
+  # sudo cp -r /home/logic/_del/lichee-nano-one-key-package/linux_ws/linux_5_2/drivers/staging/rtl8723bs/r8723bs.ko ./rootfs/root/r8723bs.ko
 
-  sudo cp -r /home/logic/_del/lichee-nano-one-key-package/root_home/wpa_supplicant.conf ./rootfs/root/wpa_supplicant.conf
+  # # in module : mkdir -p /lib/firmware/rtlwifi
+  # # in module : cp rtl8723bs_nic.bin /lib/firmware/rtlwifi/
+  # sudo mkdir -p ./rootfs/lib/firmware/rtlwifi
+  # sudo cp -r /home/logic/_del/lichee-nano-one-key-package/rtl8723bs_ws/rtl8723bs_nic.bin ./rootfs/lib/firmware/rtlwifi/rtl8723bs_nic.bin
+
+  # sudo cp -r /home/logic/_del/lichee-nano-one-key-package/root_home/wpa_supplicant.conf ./rootfs/root/wpa_supplicant.conf
+
+  # sudo cp ./overlay/init_command.sh ./rootfs/root/init_command.sh
 
   # sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x500000 -d ./rootfs/ -o jffs2.img
-  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x9F0000 -d ./rootfs/ -o jffs2.img
+
+  rm -rf rootfs.img
+  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x8F0000 -d ./rootfs/ -o rootfs.img
+
+  rm -rf userspace.img
+  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x1D0000 -d ./overlay/ -o userspace.img
+
 cd ..
 
-printf "\nprepare complete... \n"
+
+
+# prepare img file done
 
 
 printf "\nsize of files\n"
-ls -lh output/u-boot-sunxi-with-spl.bin
-ls -lh output/suniv-f1c100s-licheepi-nano.dtb
-ls -lh output/jffs2.img
-ls -lh output/zImage
+ls -l output/u-boot-sunxi-with-spl.bin
+ls -l output/suniv-f1c100s-licheepi-nano.dtb
+ls -l output/rootfs.img
+ls -l output/zImage
 
 sudo du -sh output/rootfs
 
 
 # # # uboot
-sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
+# sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
 
 # # # dtb
-sudo sunxi-fel -v -p spiflash-write 0x0100000 output/suniv-f1c100s-licheepi-nano.dtb
+# sudo sunxi-fel -v -p spiflash-write 0x0100000 output/suniv-f1c100s-licheepi-nano.dtb
 
 # # # kernel
-sudo sunxi-fel -v -p spiflash-write 0x0110000 output/zImage
+# sudo sunxi-fel -v -p spiflash-write 0x0110000 output/zImage
 
-sudo sunxi-fel -v -p spiflash-write 0x0610000 output/jffs2.img
-# # # jffs2
-# # sudo sunxi-fel -v -p spiflash-write 0x960000 jffs2.img
+# sudo sunxi-fel -v -p spiflash-write 0x0540000 output/rootfs.img
 
+sudo sunxi-fel -v -p spiflash-write 0x0E30000 output/userspace.img
 
 # sf probe 0 50000000
 # sf read 0x80C00000 0x100000 0x10000

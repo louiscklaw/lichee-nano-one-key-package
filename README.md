@@ -20,6 +20,12 @@ dts file:
 ```
 
 ```
+my_program
+my_program/helloworld
+```
+
+
+```
 command to test serial port
 
 cat /dev/ttyS1 & cat > /dev/ttyS1
