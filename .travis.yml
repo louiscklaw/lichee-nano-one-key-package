@@ -17,7 +17,7 @@ jobs:
     - stage: Build
       name: "build image"
       script:
-        - bash ./build.sh
+        - bash ./scripts/build_helloworld.sh
     - stage: after_build
       name: "build image"
       script:
