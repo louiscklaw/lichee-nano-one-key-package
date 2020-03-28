@@ -158,12 +158,12 @@
 
 			partition@540000 {
 				label = "rootfs";
-				reg = <0x540000 0x8F0000>;
+				reg = <0x540000 0x9B0000>;
 			};
 
-      partition@E30000 {
+      partition@EF0000 {
         label = "overlayfs";
-        reg = <0xE30000 0x1D0000>;
+        reg = <0xEF0000 0x110000>;
       };
 
 		};

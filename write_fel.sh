@@ -36,10 +36,10 @@ cd output
   # sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x500000 -d ./rootfs/ -o jffs2.img
 
   rm -rf rootfs.img
-  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x8F0000 -d ./rootfs/ -o rootfs.img
+  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x9B0000 -d ./rootfs/ -o rootfs.img
 
   rm -rf userspace.img
-  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x1D0000 -d ./overlay/ -o userspace.img
+  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x110000 -d ./overlay/ -o userspace.img
 
 cd ..
 
@@ -68,7 +68,7 @@ sudo sunxi-fel -v -p spiflash-write 0x0110000 output/zImage
 
 sudo sunxi-fel -v -p spiflash-write 0x0540000 output/rootfs.img
 
-sudo sunxi-fel -v -p spiflash-write 0x0E30000 output/userspace.img
+sudo sunxi-fel -v -p spiflash-write 0x0EF0000 output/userspace.img
 
 # sf probe 0 50000000
 # sf read 0x80C00000 0x100000 0x10000

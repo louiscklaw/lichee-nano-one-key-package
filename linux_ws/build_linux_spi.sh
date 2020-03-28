@@ -11,7 +11,6 @@ export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/
 
 LINUX_VER=linux_5_2
 
-
 # cp .config.spi.origional linux/.config
 
 # make ARCH=arm menuconfig
@@ -24,8 +23,14 @@ LINUX_VER=linux_5_2
 # printf "\nlist rootfs modules directory before build\n"
 # ls -l ../output/rootfs/lib
 
-rm -rf linux_5_2
-git clone -b nano-5.2-flash --depth=3 https://github.com/Lichee-Pi/linux.git  linux_5_2
+if [ -z "$RENEW_GIT_SOURCE" ]
+then
+  echo "ERROR: should be launch inside docker "
+
+else
+  rm -rf linux_5_2
+  git clone -b nano-5.2-flash --depth=3 https://github.com/Lichee-Pi/linux.git  linux_5_2
+fi
 
 cp .config_linux_5_2 ./linux_5_2/.config
 
