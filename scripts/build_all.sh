@@ -19,6 +19,9 @@ else
 
   echo "setup SEQUENTIAL_BUILD"
   export SEQUENTIAL_BUILD=1
+
+  echo "setup DOWNLOAD_BUILDROOT "
+  export DOWNLOAD_BUILDROOT=1
 fi
 
 if [ -z "$DOCKER_ENVIRONEMNT" ]
