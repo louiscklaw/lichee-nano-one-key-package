@@ -16,3 +16,5 @@ sleep 10
 udhcpc -i wlan0
 
 uhttpd -p 80 -h /overlay/www
+
+/overlay/get_stat.sh > /overlay/stat.txt
