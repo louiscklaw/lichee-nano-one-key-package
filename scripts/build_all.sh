@@ -49,7 +49,7 @@ cd /root
       echo "start sequential build"
       # ./build_dts.sh | tee build_dts.log
       # ./build_zImage.sh | tee build_zImage.log
-      ./build_rootfs.sh | tee build_rootfs.log
+      ./build_rootfs.sh > tee build_rootfs.log
       # ./build_uboot.sh  | tee build_uboot.log
     else
       echo "start parallel build"
