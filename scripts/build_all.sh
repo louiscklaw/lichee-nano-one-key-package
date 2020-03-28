@@ -16,6 +16,9 @@ else
 
   echo "setup RENEW_GIT_SOURCE"
   export RENEW_GIT_SOURCE=1
+
+  echo "setup SEQUENTIAL_BUILD"
+  export SEQUENTIAL_BUILD=1
 fi
 
 if [ -z "$DOCKER_ENVIRONEMNT" ]
@@ -37,14 +40,20 @@ cd /root
       ./init.sh | tee init.log
     fi
 
-    ./build_dts.sh | tee build_dts.log &
-    ./build_zImage.sh | tee build_zImage.log &
-    ./build_rootfs.sh | tee build_rootfs.log &
-    ./build_uboot.sh  | tee build_uboot.log &
 
-    wait
-
-
+    if [ -n "$SEQUENTIAL_BUILD" ]
+    then
+      ./build_dts.sh | tee build_dts.log
+      ./build_zImage.sh | tee build_zImage.log
+      ./build_rootfs.sh | tee build_rootfs.log
+      ./build_uboot.sh  | tee build_uboot.log
+    else
+      ./build_dts.sh | tee build_dts.log &
+      ./build_zImage.sh | tee build_zImage.log &
+      ./build_rootfs.sh | tee build_rootfs.log &
+      ./build_uboot.sh  | tee build_uboot.log &
+      wait
+    fi
   cd ..
 
 
