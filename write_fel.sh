@@ -56,17 +56,17 @@ ls -l output/zImage
 
 sudo du -sh output/rootfs
 
-
+# /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/dts_file/suniv-f1c100s-licheepi-nano.dts
 # # # uboot
-# sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
+sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
 
 # # # dtb
-# sudo sunxi-fel -v -p spiflash-write 0x0100000 output/suniv-f1c100s-licheepi-nano.dtb
+sudo sunxi-fel -v -p spiflash-write 0x100000 output/suniv-f1c100s-licheepi-nano.dtb
 
 # # # kernel
-# sudo sunxi-fel -v -p spiflash-write 0x0110000 output/zImage
+sudo sunxi-fel -v -p spiflash-write 0x0110000 output/zImage
 
-# sudo sunxi-fel -v -p spiflash-write 0x0540000 output/rootfs.img
+sudo sunxi-fel -v -p spiflash-write 0x0540000 output/rootfs.img
 
 sudo sunxi-fel -v -p spiflash-write 0x0E30000 output/userspace.img
 

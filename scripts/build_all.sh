@@ -11,20 +11,22 @@ else
 fi
 
 cd /root
-  # cd scripts
-  #   ./init.sh
-  # cd ..
+  cd scripts
+    ./init.sh | tee init.log
 
-  # cd uboot_ws
-  #   ./build_uboot_spi.sh
-  # cd ..
+    ./build_dts.sh | tee build_dts.log &
+    ./build_zImage.sh | tee build_zImage.log &
+    ./build_rootfs.sh | tee build_rootfs.log &
+    ./build_uboot.sh  | tee build_uboot.log &
 
-  cd rootfs_ws
-    ./build_rootfs_spi.sh
+    wait
+
+
   cd ..
 
-  cd linux_ws
-    # ./build_linux_spi.sh
-    ./build_dts.sh
-  cd ..
+
 cd ..
+
+echo "build all done"
+
+# done

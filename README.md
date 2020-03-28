@@ -1,9 +1,31 @@
 # README.md
 
+### build process
+- get docker image
+- build inside docker
+- fel to FC100s
+
+### to run docker
 ```
-docker build -f ./docker_lichee_builder.yml . -t logickee/licheepi-nano-build
-docker run -it -v $PWD:/root logickee/licheepi-nano-build bash
-./init.sh
+$ docker run -it -v $PWD:/root logickee/licheepi-nano-build bash
+
+// inside docker
+$ ./init.sh
+```
+
+### to build docker image
+```
+$ cd .docker
+$ docker build -f ./docker_lichee_builder.yml . -t logickee/licheepi-nano-build
+
+```
+
+### to compile user program
+- ensure the rootfs were compiled and run-able
+- it requires a workable musl compiler from rootfs/host directory
+```
+$ cd my_program
+$ ./build_all.sh
 ```
 
 ```
