@@ -2,11 +2,11 @@
 
 # https://www.panix.com/~elflord/unix/bash-tute.html
 
-set -xe
-
 if [ -z "$CI" ]
 then
   echo "skipping install tools"
+
+  set -xe
 else
   echo "setup INSTALL_BUILD_TOOLS"
   export INSTALL_BUILD_TOOLS=1
