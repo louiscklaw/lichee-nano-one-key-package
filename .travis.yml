@@ -42,7 +42,7 @@ jobs:
     - stage: Build
       name: "build rootfs"
       script:
-        - docker run -t --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_rootfs.sh > build_rootfs.log
+        - travis_wait 50 docker run -t --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_rootfs.sh >build_rootfs.log 2>&1
       after_script:
         - tail -100 build_rootfs.log
       after_failure:
