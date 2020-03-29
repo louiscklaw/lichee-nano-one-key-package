@@ -42,7 +42,7 @@ cd /root
     then
       echo "skipping install tools"
     else
-      ./init.sh | tee init.log
+      ./init.sh > init.log
     fi
 
     if [ -n "$SEQUENTIAL_BUILD" ]
