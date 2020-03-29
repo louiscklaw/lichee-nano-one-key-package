@@ -21,7 +21,9 @@ jobs:
     - stage: Build
       name: "build uboot"
       script:
-        - docker run -t --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_uboot.sh
+        - docker run -t --env \
+          CI=1 -v \
+          $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_uboot.sh
 
     - stage: Build
       name: "build linux/zImage/kernel"
