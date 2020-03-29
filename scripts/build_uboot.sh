@@ -1,19 +1,15 @@
 #!/usr/bin/env bash
 
-if [ -z "$DOCKER_ENVIRONEMNT" ]
-then
+if [ -n "$DOCKER_ENVIRONEMNT" ]; then
+  echo "checked docker environment, continue"
+else
   echo "ERROR: should be launch inside docker "
   exit 1
-else
-  echo "checked docker environment, continue"
 fi
 
 cd /root
   cd scripts
-    if [ -z "$INSTALL_BUILD_TOOLS" ]
-    then
-      echo "skipping install tools"
-    else
+    if [ -n "$INSTALL_BUILD_TOOLS" ]; then
       ./init.sh > init.log
     fi
   cd ..
