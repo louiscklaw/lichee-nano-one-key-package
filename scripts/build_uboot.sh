@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 if [ -n "$DOCKER_ENVIRONEMNT" ]; then
   echo "checked docker environment, continue"
 else
@@ -10,14 +12,15 @@ fi
 cd /root
   cd scripts
     if [ -n "$INSTALL_BUILD_TOOLS" ]; then
-      ./init.sh > init.log
+      echo "install build tools"
+      ./init.sh
     fi
   cd ..
 cd ..
 
 cd /root
   cd uboot_ws
-    ./build_uboot_spi.sh > build_uboot.log
+    ./build_uboot_spi.sh
   cd ..
 cd ..
 
