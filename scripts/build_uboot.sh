@@ -14,6 +14,8 @@ cd /root
     if [ -n "$INSTALL_BUILD_TOOLS" ]; then
       echo "install build tools"
       ./init.sh
+    else
+      echo "no need to install build tools"
     fi
   cd ..
 cd ..
