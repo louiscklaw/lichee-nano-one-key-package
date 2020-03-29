@@ -4,10 +4,12 @@
 
 if [ -z "$CI" ]
 then
+  # local build
   echo "skipping install tools"
 
   set -xe
 else
+  # build on travis
   echo "setup INSTALL_BUILD_TOOLS"
   export INSTALL_BUILD_TOOLS=1
 
@@ -22,6 +24,8 @@ else
 
   echo "setup DOWNLOAD_BUILDROOT "
   export DOWNLOAD_BUILDROOT=1
+
+  set -e
 fi
 
 if [ -z "$DOCKER_ENVIRONEMNT" ]
