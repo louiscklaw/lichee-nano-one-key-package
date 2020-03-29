@@ -53,8 +53,8 @@ cd /root
       echo "start sequential build"
       ./build_zImage.sh > build_zImage.log
       ./build_dts.sh > build_dts.log
-      ./build_rootfs.sh > build_rootfs.log
       ./build_uboot.sh  > build_uboot.log
+      # ./build_rootfs.sh > build_rootfs.log
     else
       echo "start parallel build"
       ./build_zImage.sh | tee build_zImage.log &

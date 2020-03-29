@@ -12,6 +12,10 @@ language: generic
 services:
   - docker
 
+cache:
+  directories:
+    - /home/travis/rootfs_ws/buildroot-2019.11.1
+
 jobs:
   include:
     - stage: Build
