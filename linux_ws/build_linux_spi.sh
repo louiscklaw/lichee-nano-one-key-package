@@ -29,7 +29,7 @@ then
 
 else
   rm -rf linux_5_2
-  git clone -b nano-5.2-flash --depth=3 https://github.com/Lichee-Pi/linux.git  linux_5_2
+  git clone -b nano-5.2-flash --depth=10 https://github.com/Lichee-Pi/linux.git  linux_5_2
 fi
 
 cp .config_linux_5_2 ./linux_5_2/.config
