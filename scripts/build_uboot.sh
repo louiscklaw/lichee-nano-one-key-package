@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -xev
 
 if [ -n "$DOCKER_ENVIRONEMNT" ]; then
   echo "checked docker environment, continue"
