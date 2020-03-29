@@ -18,6 +18,15 @@ cache:
 
 jobs:
   include:
+    - stage: BuildDockerImage
+      name: "build uboot"
+      script:
+        - ./scripts/build_docker_image.sh
+
+      after_success:
+        - docker login -u logickee -p $REGISTRY_PASS
+        - docker push logickee/licheepi-nano-build:latest
+
     - stage: Build
       name: "build uboot"
       script:
