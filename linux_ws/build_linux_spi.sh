@@ -25,7 +25,7 @@ LINUX_VER=linux_5_2
 
 if [ -z "$RENEW_GIT_SOURCE" ]
 then
-  echo "ERROR: should be launch inside docker "
+  echo "skipping renew git source (RENEW_GIT_SOURCE)"
 
 else
   rm -rf linux_5_2
