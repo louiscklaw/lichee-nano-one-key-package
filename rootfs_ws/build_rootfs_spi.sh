@@ -27,17 +27,16 @@ fi
 
 sudo rm -rf ../output/rootfs.tar
 
-echo "CLEAR_WORKSPACE_BEFORE_BUILD checking... "
-if [ -z "$CLEAR_WORKSPACE_BEFORE_BUILD" ]
-then
-  echo "skipping cleaning for rootfs"
-else
-  # cd $BUILD_ROOT_VER
-  #   printf "\ncleaning...\n"
-  #   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- clean -j20
-
-  # cd ..
-fi
+# echo "CLEAR_WORKSPACE_BEFORE_BUILD checking... "
+# if [ -z "$CLEAR_WORKSPACE_BEFORE_BUILD" ]
+# then
+#   echo "skipping cleaning for rootfs"
+# else
+#   # cd $BUILD_ROOT_VER
+#   #   printf "\ncleaning...\n"
+#   #   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- clean -j20
+#   # cd ..
+# fi
 
 cd $BUILD_ROOT_VER
   printf "\ncompile new copy\n"
