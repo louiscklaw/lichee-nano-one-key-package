@@ -19,7 +19,7 @@ cache:
 jobs:
   include:
     - stage: BuildDockerImage
-      name: "build uboot"
+      name: "build docker image"
       before_script:
         - docker pull logickee/licheepi-nano-build:latest
       script:
@@ -37,7 +37,7 @@ jobs:
     - stage: Build
       name: "build linux/zImage/kernel"
       script:
-        - docker run -t --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_zImage.sh
+        - travis_wait 50 sleep infinity & docker run -t --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_zImage.sh
 
     - stage: Build
       name: "build rootfs"
