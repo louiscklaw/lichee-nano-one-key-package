@@ -28,7 +28,7 @@ cd ..
 
 cd /root
   cd rootfs_ws
-    ./build_rootfs_spi.sh > build_rootfs_spi.log
+    ./build_rootfs_spi.sh
   cd ..
 cd ..
 
