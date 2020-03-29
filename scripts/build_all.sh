@@ -51,14 +51,14 @@ cd /root
     if [ -n "$SEQUENTIAL_BUILD" ]
     then
       echo "start sequential build"
-      ./build_dts.sh > build_dts.log
       ./build_zImage.sh > build_zImage.log
+      ./build_dts.sh > build_dts.log
       ./build_rootfs.sh > build_rootfs.log
       ./build_uboot.sh  > build_uboot.log
     else
       echo "start parallel build"
-      ./build_dts.sh | tee build_dts.log &
       ./build_zImage.sh | tee build_zImage.log &
+      ./build_dts.sh | tee build_dts.log &
       ./build_rootfs.sh | tee build_rootfs.log &
       ./build_uboot.sh  | tee build_uboot.log &
       wait
