@@ -37,7 +37,7 @@ jobs:
     - stage: Build
       name: "build linux/zImage/kernel"
       script:
-        - travis_wait 50 sleep infinity & docker run -t --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_zImage.sh
+        - travis_wait 50 sleep infinity & docker run -t --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_zImage.sh >build_zimage.log 2>&1
 
     - stage: Build
       name: "build rootfs"
