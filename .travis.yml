@@ -20,6 +20,8 @@ jobs:
   include:
     - stage: BuildDockerImage
       name: "build uboot"
+      before_script:
+        - docker pull logickee/licheepi-nano-build:latest
       script:
         - ./scripts/build_docker_image.sh
 
