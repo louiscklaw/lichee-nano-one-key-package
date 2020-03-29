@@ -23,6 +23,11 @@ jobs:
       script:
         - docker run -t --env \
           CI=1 -v \
+          INSTALL_BUILD_TOOLS=1 \
+          CLEAR_WORKSPACE_BEFORE_BUILD=1 \
+          RENEW_GIT_SOURCE=1 \
+          SEQUENTIAL_BUILD=1 \
+          DOWNLOAD_BUILDROOT=1 \
           $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_uboot.sh
 
     - stage: Build
