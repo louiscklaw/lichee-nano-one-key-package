@@ -15,16 +15,16 @@ else
   exit 1
 fi
 
-cd /root
-  cd scripts
-    if [ -n "$INSTALL_BUILD_TOOLS" ]; then
-      echo "install build tools"
-      ./init.sh
-    else
-      echo "no need to install build tools"
-    fi
-  cd ..
-cd ..
+# cd /root
+#   cd scripts
+#     if [ -n "$INSTALL_BUILD_TOOLS" ]; then
+#       echo "install build tools"
+#       ./init.sh
+#     else
+#       echo "no need to install build tools"
+#     fi
+#   cd ..
+# cd ..
 
 cd /root
   cd rootfs_ws
