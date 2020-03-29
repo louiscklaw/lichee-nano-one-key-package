@@ -2,6 +2,12 @@
 
 set -xev
 
+export INSTALL_BUILD_TOOLS 1
+export CLEAR_WORKSPACE_BEFORE_BUILD 1
+export RENEW_GIT_SOURCE 1
+export SEQUENTIAL_BUILD 1
+export DOWNLOAD_BUILDROOT 1
+
 if [ -n "$DOCKER_ENVIRONEMNT" ]; then
   echo "checked docker environment, continue"
 else
