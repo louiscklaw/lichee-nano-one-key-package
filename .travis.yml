@@ -28,6 +28,11 @@ jobs:
       script:
         - docker run -t --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_zImage.sh
 
+    - stage: Build
+      name: "build rootfs"
+      script:
+        - docker run -t --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_rootfs.sh
+
     - stage: after_build
       name: "build image"
       script:

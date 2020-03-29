@@ -28,7 +28,7 @@ cd ..
 
 cd /root
   cd linux_ws
-    ./build_linux_spi.sh > build_linux_spi.log
+    ./build_linux_spi.sh
   cd ..
 cd ..
 
