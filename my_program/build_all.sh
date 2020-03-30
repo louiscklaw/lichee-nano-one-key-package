@@ -11,18 +11,17 @@ cd set_voltage
   ./build.sh
 cd ..
 
+cd hello_ping
+  ./build.sh
+cd ..
 
-# cd hello_ping
-#   ./build.sh
-# cd ..
+cd hello_dps_on
+  ./build.sh
+cd ..
 
-# cd hello_dps_on
-#   ./build.sh
-# cd ..
-
-# cd hello_dps_off
-#   ./build.sh
-# cd ..
+cd hello_dps_off
+  ./build.sh
+cd ..
 
 
 exit 0

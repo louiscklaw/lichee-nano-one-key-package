@@ -46,7 +46,6 @@ unsigned short crc16(char *ptr, int count)
 }
 
 int change_voltage(char * target_port, char * value_input){
-
   // printf("voltage to change: %s mV\n", value_input);
 
   unsigned short checksum_result;
@@ -128,7 +127,7 @@ int change_voltage(char * target_port, char * value_input){
   return EXIT_SUCCESS;
 }
 
-int change_current(char * value_input){
+int change_current(char * target_port, char * value_input){
   printf("current to change: %s\n", value_input);
   unsigned short checksum_result;
 
@@ -198,7 +197,8 @@ int main(int argc, char *argv[]) {
     // printf("test current %04d\n", atoi(parameter_current));
 
     change_voltage("/dev/ttyS1", parameter_voltage);
-    // change_current(parameter_current);
+    usleep(200);
+    change_current("/dev/ttyS1", parameter_current);
 
   }
 

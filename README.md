@@ -5,6 +5,10 @@
 - build inside docker
 - fel to FC100s
 
+```
+find overlay |entr -c -s "cp -r overlay ./output/overlay"
+```
+
 ### test command
 ```
 ➜ curl http://192.168.99.250/cgi-bin/hello_uart
