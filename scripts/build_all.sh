@@ -2,7 +2,7 @@
 
 # https://www.panix.com/~elflord/unix/bash-tute.html
 
-set -xev
+set -e
 
 # export CLEAR_WORKSPACE_BEFORE_BUILD=1
 
@@ -51,7 +51,6 @@ cd /root
 
     # it must compile after ready
     ./build_powersupply_pi.sh  | tee build_powersupply_pi.log
-    exit 0
 
   cd ..
 

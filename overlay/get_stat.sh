@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-set -xev
+set -xe
 
 dmesg
 

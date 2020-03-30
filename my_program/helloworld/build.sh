@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -xev
+set -xe
 
 export PATH=/root/rootfs_ws/buildroot-2019.11.1/output/host/bin:$PATH
 

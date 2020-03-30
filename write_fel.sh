@@ -13,8 +13,6 @@ sudo sunxi-fel spiflash-info
   # copy new powersupply-pi to overlay directory
   cp /home/logic/_workspace/lichee-nano-one-key-package/my_program/hello_dps_on/hello_uart /home/logic/_workspace/lichee-nano-one-key-package/overlay/www/cgi-bin/dps_on
 
-  # my_program/change_setting/set_voltage
-  cp /home/logic/_workspace/lichee-nano-one-key-package/my_program/change_setting/set_voltage /home/logic/_workspace/lichee-nano-one-key-package/overlay/www/cgi-bin/set_voltage
 
 
   # prepare overlay_fs
