@@ -2,7 +2,7 @@
 
 set -xev
 
-make clean
+# make clean
 make
 
 cp hello_ping ../../output/overlay

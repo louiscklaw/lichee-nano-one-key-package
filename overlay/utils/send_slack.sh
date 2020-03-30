@@ -16,4 +16,4 @@ rm -rf wget-log*
 rm -rf /tmp/temp.json
 
 
-wget -O- --post-data='${cat /tmp/temp.json}'  --header='Content-type: application/json' 'https://hooks.slack.com/services/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'
+wget -O- --post-data='${cat /tmp/temp.json}'  --header='Content-type: application/json' 'https://hooks.slack.com/services/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'

@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-set -xev
+set -xe
 
 insmod r8723bs.ko
 
@@ -15,7 +15,6 @@ wpa_supplicant -B -i wlan0 -c /overlay/wpa_supplicant.conf
 sleep 10
 
 udhcpc -i wlan0
-
 
 # assume network started
 

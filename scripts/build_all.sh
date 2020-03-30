@@ -41,13 +41,17 @@ cd /root
       ./init.sh | tee init.log
     fi
 
-    ./build_dts.sh | tee build_dts.log &
-    ./build_zImage.sh | tee build_zImage.log &
-    ./build_rootfs.sh | tee build_rootfs.log &
-    ./build_uboot.sh  | tee build_uboot.log &
+    # ./build_dts.sh | tee build_dts.log &
+    # ./build_zImage.sh | tee build_zImage.log &
+    # ./build_rootfs.sh | tee build_rootfs.log &
+    # ./build_uboot.sh  | tee build_uboot.log &
 
-    wait
 
+    # wait
+
+    # it must compile after ready
+    ./build_powersupply_pi.sh  | tee build_powersupply_pi.log
+    exit 0
 
   cd ..
 
@@ -56,6 +60,6 @@ cd ..
 
 echo "build all done"
 
-curl -X POST -H 'Content-type: application/json' --data '{"text":"/home/logic/_workspace/lichee-nano-one-key-package build all done!"}' 'https://hooks.slack.com/services/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'
+curl -X POST -H 'Content-type: application/json' --data '{"text":"/home/logic/_workspace/lichee-nano-one-key-package build all done!"}' 'https://hooks.slack.com/services/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'
 
 # done
