@@ -49,11 +49,11 @@ cd output
 
   echo "regenerate rootfs.img"
   rm -rf rootfs.img
-  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0xA40000 -d ./rootfs/ -o rootfs.img
+  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0xA00000 -d ./rootfs/ -o rootfs.img
 
   echo "regenerate overlay.img"
   rm -rf overlay.img
-  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x110000 -d ./overlay/ -o overlay.img
+  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x150000 -d ./overlay/ -o overlay.img
 
 cd ..
 
@@ -77,14 +77,14 @@ sudo du -sh output/rootfs
 
   # dtb
   # /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/dts_file/suniv-f1c100s-licheepi-nano.dts
-  # sudo sunxi-fel -v -p spiflash-write 0x70000 output/suniv-f1c100s-licheepi-nano.dtb
+  sudo sunxi-fel -v -p spiflash-write 0x70000 output/suniv-f1c100s-licheepi-nano.dtb
 
   # kernel
   # sudo sunxi-fel -v -p spiflash-write 0x80000 output/zImage
 
-  # sudo sunxi-fel -v -p spiflash-write 0x4B0000 output/rootfs.img
+  sudo sunxi-fel -v -p spiflash-write 0x4B0000 output/rootfs.img
 
-  sudo sunxi-fel -v -p spiflash-write 0xEF0000 output/overlay.img
+  sudo sunxi-fel -v -p spiflash-write 0xEB0000 output/overlay.img
 
 
 # uboot erase and reset

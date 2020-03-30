@@ -10,7 +10,7 @@ mkdir -p /lib/firmware/rtlwifi
 rm -rf /lib/firmware/rtlwifi/rtl8723bs_nic.bin
 ln -s   /overlay/rtl8723bs_nic.bin /lib/firmware/rtlwifi/rtl8723bs_nic.bin
 
-wpa_supplicant -B -i wlan0 -c /overlay/wpa_supplicant.conf
+wpa_supplicant -B -i wlan0 -c /overlay/wpa_home/wpa_supplicant.conf
 
 sleep 10
 
