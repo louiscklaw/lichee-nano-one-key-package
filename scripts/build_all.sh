@@ -2,7 +2,11 @@
 
 # https://www.panix.com/~elflord/unix/bash-tute.html
 
-set -xe
+set -xev
+
+# export CLEAR_WORKSPACE_BEFORE_BUILD=1
+
+sudo rm -rf /root/rootfs_ws/buildroot-2019.11.1/output/build/busybox-1.31.1/.stamp_built
 
 if [ -z "$CI" ]
 then
@@ -51,5 +55,7 @@ cd /root
 cd ..
 
 echo "build all done"
+
+curl -X POST -H 'Content-type: application/json' --data '{"text":"/home/logic/_workspace/lichee-nano-one-key-package build all done!"}' 'https://hooks.slack.com/services/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'
 
 # done

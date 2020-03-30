@@ -11,8 +11,18 @@ sudo sunxi-fel list
 sudo sunxi-fel spiflash-info
 
 
-# prepare rootfs...
+# prepare overlay_fs
+rm -rf ./output/overlay
+cp -r ./overlay ./output
+ls -l ./output/overlay
+sudo chmod -R +x  ./output *.sh
 
+
+# usage of overlay
+du -sh ./output/overlay
+
+
+# prepare rootfs...
 cd output
   # clear workspace
 
@@ -35,11 +45,13 @@ cd output
 
   # sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x500000 -d ./rootfs/ -o jffs2.img
 
+  echo "regenerate rootfs.img"
   rm -rf rootfs.img
-  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x9B0000 -d ./rootfs/ -o rootfs.img
+  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0xA40000 -d ./rootfs/ -o rootfs.img
 
-  rm -rf userspace.img
-  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x110000 -d ./overlay/ -o userspace.img
+  echo "regenerate overlay.img"
+  rm -rf overlay.img
+  sudo mkfs.jffs2 -s 0x100 -e 0x10000 --pad=0x110000 -d ./overlay/ -o overlay.img
 
 cd ..
 
@@ -58,17 +70,17 @@ sudo du -sh output/rootfs
 
 # /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/dts_file/suniv-f1c100s-licheepi-nano.dts
 # # # uboot
-sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
+# sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
 
-# # # dtb
-sudo sunxi-fel -v -p spiflash-write 0x100000 output/suniv-f1c100s-licheepi-nano.dtb
+# # # # dtb
+# sudo sunxi-fel -v -p spiflash-write 0x70000 output/suniv-f1c100s-licheepi-nano.dtb
 
-# # # kernel
-sudo sunxi-fel -v -p spiflash-write 0x0110000 output/zImage
+# # # # kernel
+# sudo sunxi-fel -v -p spiflash-write 0x80000 output/zImage
 
-sudo sunxi-fel -v -p spiflash-write 0x0540000 output/rootfs.img
+# sudo sunxi-fel -v -p spiflash-write 0x4B0000 output/rootfs.img
 
-sudo sunxi-fel -v -p spiflash-write 0x0EF0000 output/userspace.img
+sudo sunxi-fel -v -p spiflash-write 0xEF0000 output/overlay.img
 
 # sf probe 0 50000000
 # sf read 0x80C00000 0x100000 0x10000
