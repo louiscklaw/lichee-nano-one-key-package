@@ -61,8 +61,10 @@ echo ""
 
   if [ $ARGX == "on" ]; then
     /overlay/www/cgi-bin/hello_uart
+
+    exit 0
   fi
 
-echo "{\"success\":\"true\"}"
+echo "{\"status\":\"failed, cannot find matching function\"}"
 
 exit 0
