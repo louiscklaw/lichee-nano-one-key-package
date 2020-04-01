@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+# suppose running on /etc/init.d/S99_powersupply_pi
+
+set -ex
+
+cd /
+mkdir -p /overlay
+mount -t jffs2 /dev/mtdblock4 /overlay

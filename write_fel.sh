@@ -27,17 +27,25 @@ sudo sunxi-fel spiflash-info
 
 # add entry into startup script
   # link into startup script
-  sudo cp /home/logic/_workspace/lichee-nano-one-key-package/overlay/S99init_powersupply_pi /home/logic/_workspace/lichee-nano-one-key-package/output/rootfs/etc/init.d/S99init_powersupply_pi
+
+  sudo cp /home/logic/_workspace/lichee-nano-one-key-package/overlay/init.d/S10dps_mount /home/logic/_workspace/lichee-nano-one-key-package/output/rootfs/etc/init.d/
+
+  sudo cp /home/logic/_workspace/lichee-nano-one-key-package/overlay/init.d/S11dps_files_link /home/logic/_workspace/lichee-nano-one-key-package/output/rootfs/etc/init.d/
+
+  sudo cp /home/logic/_workspace/lichee-nano-one-key-package/overlay/init.d/S99init_powersupply_pi /home/logic/_workspace/lichee-nano-one-key-package/output/rootfs/etc/init.d/
+
+  sudo chmod +x /home/logic/_workspace/lichee-nano-one-key-package/output/rootfs/etc/init.d/S10dps_mount
+
+  sudo chmod +x /home/logic/_workspace/lichee-nano-one-key-package/output/rootfs/etc/init.d/S11dps_files_link
 
   sudo chmod +x /home/logic/_workspace/lichee-nano-one-key-package/output/rootfs/etc/init.d/S99init_powersupply_pi
 
-  sudo rm -rf /home/logic/_workspace/lichee-nano-one-key-package/output/overlay/S99init_powersupply_pi
 
 # add ssh-key to the module
 cd output
-  sudo mkdir -p ./overlay/ssk-keystore
+  sudo mkdir -p ./overlay/.ssh
 
-  sudo cp -r /home/logic/_workspace/lichee-nano-one-key-package/ssh-keystore/* ./overlay/ssk-keystore/
+  sudo cp -r /home/logic/_workspace/lichee-nano-one-key-package/ssh-keystore/* ./overlay/.ssh/
 
 cd ..
 
@@ -82,6 +90,7 @@ sudo du -sh output/rootfs
   sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
 
   # dtb
+  # NOTE: edit this files only, not for download
   # /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/dts_file/suniv-f1c100s-licheepi-nano.dts
   sudo sunxi-fel -v -p spiflash-write 0x70000 output/suniv-f1c100s-licheepi-nano.dtb
 
