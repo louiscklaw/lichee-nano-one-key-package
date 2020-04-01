@@ -12,4 +12,7 @@ esp8089_ws/esp8089
 scripts/flashimg.bin
 scripts/jffs2.img
 
+id_rsa
+id_rsa.pub
+
 *.ods#

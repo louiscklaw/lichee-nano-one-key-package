@@ -16,7 +16,7 @@ sudo sunxi-fel spiflash-info
 
 
   # prepare overlay_fs
-  rm -rf ./output/overlay
+  sudo rm -rf ./output/overlay
   cp -r ./overlay ./output
   # ls -l ./output/overlay
   sudo chmod -R +x  ./output *.sh
@@ -33,7 +33,13 @@ sudo sunxi-fel spiflash-info
 
   sudo rm -rf /home/logic/_workspace/lichee-nano-one-key-package/output/overlay/S99init_powersupply_pi
 
+# add ssh-key to the module
+cd output
+  sudo mkdir -p ./overlay/ssk-keystore
 
+  sudo cp -r /home/logic/_workspace/lichee-nano-one-key-package/ssh-keystore/* ./overlay/ssk-keystore/
+
+cd ..
 
 # add rtl8723 drivers
 cd output
@@ -73,14 +79,14 @@ sudo du -sh output/rootfs
 
 # download to module
   # uboot
-  # sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
+  sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
 
   # dtb
   # /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/dts_file/suniv-f1c100s-licheepi-nano.dts
   sudo sunxi-fel -v -p spiflash-write 0x70000 output/suniv-f1c100s-licheepi-nano.dtb
 
   # kernel
-  # sudo sunxi-fel -v -p spiflash-write 0x80000 output/zImage
+  sudo sunxi-fel -v -p spiflash-write 0x80000 output/zImage
 
   sudo sunxi-fel -v -p spiflash-write 0x4B0000 output/rootfs.img
 
