@@ -20,6 +20,8 @@ cd /overlay
 
 cd ..
 
+sleep 1
+
 cd /etc
   wget http://192.168.99.253:8000/init.d/S11dps_files_link -O /tmp/S11dps_files_link
   chmod +x /tmp/S11dps_files_link
@@ -62,23 +64,34 @@ cd /overlay/www
 
 cd ../..
 
-cd /overlay
+cd /overlay/www/cgi-bin
   rm -rf set_voltage
-  wget http://192.168.99.253:8000/www/cgi-bin/set_voltage
-  chmod +x set_voltage
+  wget http://192.168.99.253:8000/www/cgi-bin/set_voltage -O /tmp/set_voltage
+  chmod +x /tmp/set_voltage
   rm -rf /overlay/www/cgi-bin/set_voltage
-  mv set_voltage /overlay/www/cgi-bin/set_voltage
+  mv /tmp/set_voltage /overlay/www/cgi-bin/set_voltage
   sleep 0.5
 
   # /home/logic/_workspace/lichee-nano-one-key-package/overlay/www/cgi-bin/change_settings.sh
   rm -rf change_settings.sh
-  wget http://192.168.99.253:8000/www/cgi-bin/change_settings.sh
-  chmod +x change_settings.sh
+  wget http://192.168.99.253:8000/www/cgi-bin/change_settings.sh -O /tmp/change_settings.sh
+  chmod +x /tmp/change_settings.sh
   rm -rf /overlay/www/cgi-bin/change_settings.sh
-  mv change_settings.sh /overlay/www/cgi-bin/change_settings.sh
+  mv /tmp/change_settings.sh /overlay/www/cgi-bin/change_settings.sh
   sleep 0.5
 
+  # /home/logic/_workspace/lichee-nano-one-key-package/overlay/www/cgi-bin/change_settings.sh
+  rm -rf hello_uart_off
+  wget http://192.168.99.253:8000/www/cgi-bin/hello_uart_off -O /tmp/hello_uart_off
+  chmod +x /tmp/hello_uart_off
+  rm -rf /overlay/www/cgi-bin/hello_uart_off
+  mv /tmp/hello_uart_off /overlay/www/cgi-bin/hello_uart_off
+  cp /overlay/www/cgi-bin/hello_uart_off /tmp/www/cgi-bin/hello_uart_off
+  sleep 0.5
 
+cd ../../..
+
+cd /overlay
   rm -rf send_slack.sh
   wget http://192.168.99.253:8000/utils/send_slack.sh
   chmod +x send_slack.sh

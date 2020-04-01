@@ -23,5 +23,4 @@ cd hello_dps_off
   ./build.sh
 cd ..
 
-
 exit 0
