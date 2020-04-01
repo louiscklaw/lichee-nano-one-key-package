@@ -25,6 +25,7 @@ udhcpc -i wlan0
 # wget
 
 # extract http client content
+# /tmp/powersupply-pi-client
 unzip -o /overlay/react_client.zip -d /tmp
 
 # init http server

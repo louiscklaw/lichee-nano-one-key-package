@@ -86,6 +86,9 @@ cd /overlay
   chmod +x react_client.zip
   rm -rf /tmp/react_client.zip
 
+  rm -rf /tmp/powersupply-pi-client
+  unzip -o /overlay/react_client.zip -d /tmp
+
   rm -rf init_main.sh
   wget http://192.168.99.253:8000/init_main.sh
   sleep 0.1
