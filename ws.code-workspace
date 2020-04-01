@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "/home/logic/_workspace/raspberry-pi-playlist"
+		},
+		{
+			"path": "/home/logic/_workspace/test-react-pwa"
 		}
 	],
 	"settings": {}
