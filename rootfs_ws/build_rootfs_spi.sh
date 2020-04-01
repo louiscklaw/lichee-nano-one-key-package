@@ -5,7 +5,7 @@ set -xe
 BUILD_ROOT_VER=buildroot-2019.11.1
 # BUILD_ROOT_VER=buildroot-2017.08
 
-printf "\nstart building rootfs\n"
+# start building rootfs
 
 export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH
 
@@ -31,6 +31,14 @@ else
 
   cd ..
 fi
+
+# update make config before build
+  cd $BUILD_ROOT_VER
+    cp ../.config/.config ./.config
+    cp ../.config/.config_busybox package/busybox/busybox.config
+  cd ..
+
+exit 1
 
 cd $BUILD_ROOT_VER
   printf "\ncompile new copy\n"
