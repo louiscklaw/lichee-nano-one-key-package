@@ -22,8 +22,10 @@ udhcpc -i wlan0
 
 # assume network started after this line
 
+# wget
+
 # extract http client content
-unzip /overlay/react_client.zip -d /tmp
+unzip -o /overlay/react_client.zip -d /tmp
 
 # init http server
 # uhttpd -p 80 -h /overlay/www

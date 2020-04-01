@@ -8,7 +8,6 @@ cd ../..
 
 rm -rf src/react_client.zip
 
-
 pwd
 
 cd src

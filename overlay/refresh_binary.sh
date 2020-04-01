@@ -2,16 +2,41 @@
 
 # python -m SimpleHTTPServer 8000
 # in directory /home/logic/_workspace/lichee-nano-one-key-package/overlay
-set -x
+set -xe
 
 cd /overlay
+  wget http://192.168.99.253:8000/refresh_binary.sh -O /tmp/refresh_binary.sh
+  rm -rf refresh_binary.sh
+  mv /tmp/refresh_binary.sh ./refresh_binary.sh
+  chmod +x refresh_binary.sh
 
   rm -rf refresh.sh
-  wget http://192.168.99.253:8000/www/cgi-bin/refresh.sh
-  chmod +x refresh.sh
+  wget http://192.168.99.253:8000/www/cgi-bin/refresh.sh -O /tmp/refresh.sh
   rm -rf /overlay/www/cgi-bin/refresh.sh
-  mv refresh.sh /overlay/www/cgi-bin/refresh.sh
+  mv /tmp/refresh.sh /overlay/www/cgi-bin/refresh.sh
+  chmod +x /overlay/www/cgi-bin/refresh.sh
 
+cd ..
+
+cd /etc
+  wget http://192.168.99.253:8000/init.d/S11dps_files_link -O /tmp/S11dps_files_link
+  chmod +x /tmp/S11dps_files_link
+  rm -rf S11dps_files_link
+  mv /tmp/S11dps_files_link /etc/init.d/S11dps_files_link
+
+  wget http://192.168.99.253:8000/init.d/S10dps_mount -O /tmp/S10dps_mount
+  chmod +x /tmp/S10dps_mount
+  rm -rf S10dps_mount
+  mv /tmp/S10dps_mount /etc/init.d/S10dps_mount
+
+  wget http://192.168.99.253:8000/init.d/S99init_powersupply_pi -O /tmp/S99init_powersupply_pi
+  chmod +x /tmp/S99init_powersupply_pi
+  rm -rf S99init_powersupply_pi
+  mv /tmp/S99init_powersupply_pi /etc/init.d/S99init_powersupply_pi
+
+cd ..
+
+cd /overlay
   rm -rf set_voltage
   wget http://192.168.99.253:8000/www/cgi-bin/set_voltage
   chmod +x set_voltage
@@ -63,11 +88,6 @@ cd /overlay
   wget http://192.168.99.253:8000/init_main.sh
   sleep 0.1
   chmod +x init_main.sh
-
-  rm -rf refresh_binary.sh
-  wget http://192.168.99.253:8000/refresh_binary.sh
-  sleep 0.1
-  chmod +x refresh_binary.sh
 
 cd ..
 

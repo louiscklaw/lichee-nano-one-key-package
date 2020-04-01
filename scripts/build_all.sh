@@ -10,7 +10,8 @@ sudo rm -rf /root/rootfs_ws/buildroot-2019.11.1/output/build/busybox-1.31.1/.sta
 
 if [ -z "$CI" ]
 then
-  # skipping install tools
+  echo "skipping install tools"
+
 else
   # setup INSTALL_BUILD_TOOLS
   export INSTALL_BUILD_TOOLS=1
@@ -27,7 +28,7 @@ then
   # ERROR: should be launch inside docker
   exit 99
 else
-  # checked docker environment, continue
+  echo "checked docker environment, continue"
 fi
 
 cd /root
