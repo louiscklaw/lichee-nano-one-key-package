@@ -80,9 +80,11 @@ cd /overlay
   rm -rf /overlay/utils/send_slack_helloworld.sh
   mv send_slack_helloworld.sh /overlay/utils/send_slack_helloworld.sh
 
+  wget http://192.168.99.253:8000/react_client.zip -O /tmp/react_client.zip
   rm -rf react_client.zip
-  wget http://192.168.99.253:8000/react_client.zip
+  mv /tmp/react_client.zip ./react_client.zip
   chmod +x react_client.zip
+  rm -rf /tmp/react_client.zip
 
   rm -rf init_main.sh
   wget http://192.168.99.253:8000/init_main.sh
