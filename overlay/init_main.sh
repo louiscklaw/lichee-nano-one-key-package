@@ -26,11 +26,13 @@ udhcpc -i wlan0
 
 # extract http client content
 # /tmp/powersupply-pi-client
-unzip -o /overlay/react_client.zip -d /tmp
+# unzip -o /overlay/react_client.zip -d /tmp
+ln -s /overlay/www /tmp/www
+
 
 # init http server
 # uhttpd -p 80 -h /overlay/www
-uhttpd -p 80 -h /tmp/powersupply-pi-client/build
+uhttpd -p 80 -h /tmp/www
 ./utils/send_slack_httpd_started.sh
 
 /overlay/get_stat.sh > /overlay/stat.txt

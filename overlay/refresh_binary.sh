@@ -36,6 +36,16 @@ cd /etc
 
 cd ..
 
+cd /overlay/www
+  wget http://192.168.99.253:8000/www/index.html -O /tmp/index.html
+  chmod +x /tmp/index.html
+
+  rm -rf /overlay/www/index.html
+  mv /tmp/index.html /overlay/www/index.html
+  rm -rf /tmp/index.html
+
+cd ../..
+
 cd /overlay
   rm -rf set_voltage
   wget http://192.168.99.253:8000/www/cgi-bin/set_voltage
@@ -49,6 +59,8 @@ cd /overlay
   chmod +x change_settings.sh
   rm -rf /overlay/www/cgi-bin/change_settings.sh
   mv change_settings.sh /overlay/www/cgi-bin/change_settings.sh
+
+
 
   rm -rf send_slack.sh
   wget http://192.168.99.253:8000/utils/send_slack.sh
@@ -80,14 +92,14 @@ cd /overlay
   rm -rf /overlay/utils/send_slack_helloworld.sh
   mv send_slack_helloworld.sh /overlay/utils/send_slack_helloworld.sh
 
-  wget http://192.168.99.253:8000/react_client.zip -O /tmp/react_client.zip
-  rm -rf react_client.zip
-  mv /tmp/react_client.zip ./react_client.zip
-  chmod +x react_client.zip
-  rm -rf /tmp/react_client.zip
+  # wget http://192.168.99.253:8000/react_client.zip -O /tmp/react_client.zip
+  # rm -rf react_client.zip
+  # mv /tmp/react_client.zip ./react_client.zip
+  # chmod +x react_client.zip
+  # rm -rf /tmp/react_client.zip
 
-  rm -rf /tmp/powersupply-pi-client
-  unzip -o /overlay/react_client.zip -d /tmp
+  # rm -rf /tmp/powersupply-pi-client
+  # unzip -o /overlay/react_client.zip -d /tmp
 
   rm -rf init_main.sh
   wget http://192.168.99.253:8000/init_main.sh
