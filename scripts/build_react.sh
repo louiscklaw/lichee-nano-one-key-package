@@ -3,17 +3,14 @@
 set -xe
 
 cd src/powersupply-pi-client
-  yarn build
+  PUBLIC_URL=https://louiscklaw.github.io/test-react-pwa yarn build
 cd ../..
-
-rm -rf src/react_client.zip
 
 pwd
 
-cd src
-  zip -r react_client.zip powersupply-pi-client/build
-cd ..
+rm -rf /home/logic/_workspace/test-react-pwa/docs
 
-ls -lh src/react_client.zip
+cd src/powersupply-pi-client
+  cp -R build/ /home/logic/_workspace/test-react-pwa/docs
 
-mv src/react_client.zip overlay/react_client.zip
+cd ../../..
