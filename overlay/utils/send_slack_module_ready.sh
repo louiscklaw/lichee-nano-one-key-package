@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-timeout 2 wget -O- --post-data='{"text":"powersupply-pi is ready!"}'  --header='Content-type: application/json' 'https://hooks.slack.com/services/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'
+timeout 2 wget -O- --post-data='{"text":"powersupply-pi is ready!"}'  --header='Content-type: application/json' 'https://hooks.slack.com/services/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'

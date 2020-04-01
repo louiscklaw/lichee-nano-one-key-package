@@ -16,5 +16,7 @@ scripts/jffs2.img
 id_rsa
 id_rsa.pub
 
+__pycache__
+
 
 *.ods#
