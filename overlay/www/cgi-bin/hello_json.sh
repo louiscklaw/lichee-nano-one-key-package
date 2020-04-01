@@ -1,15 +1,13 @@
 #!/bin/sh
 
-echo "Content-type: text/html"
-echo ""
+# http://www.yolinux.com/TUTORIALS/BashShellCgi.html
 
-echo '<html>'
-echo '<head>'
-echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">'
-echo '<title>Environment Variables</title>'
-echo '</head>'
-echo '<body>'
-echo 'Parse Variables:'
+# http://192.168.99.250/cgi-bin/hello_json.sh?namex=ferret&namez=valuez&namey=valuey
+# http://192.168.99.250/cgi-bin/hello_json.sh?namex=on&namez=valuez&namey=valuey
+
+
+echo "Content-Type: text/json"
+echo ""
 
 # Save the old internal field separator.
   OIFS="$IFS"
@@ -49,15 +47,22 @@ echo 'Parse Variables:'
         esac
   done
 
-  echo 'Parsed Values:'
-  echo '<br>'
-  echo $ARGX
-  echo '<br>'
-  echo $ARGY
-  echo '<br>'
-  echo $ARGZ
+  # echo 'Parsed Values:'
+  # echo '<br>'
+  # echo $ARGX
+  # echo '<br>'
+  # echo $ARGY
+  # echo '<br>'
+  # echo $ARGZ
 
-echo '</body>'
-echo '</html>'
+  if [ $ARGX == "off" ]; then
+    /overlay/www/cgi-bin/hello_uart_off
+  fi
+
+  if [ $ARGX == "on" ]; then
+    /overlay/www/cgi-bin/hello_uart
+  fi
+
+echo "{\"success\":\"true\"}"
 
 exit 0
