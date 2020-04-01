@@ -51,6 +51,8 @@ int main(int argc, char ** argv) {
   // }
 
   // Don't forget to clean up
+
+  puts("{\"status\":\"done\"}");
   close(fd);
   return 0;
 }
