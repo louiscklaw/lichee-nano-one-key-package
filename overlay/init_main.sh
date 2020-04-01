@@ -20,14 +20,14 @@ sleep 10
 
 udhcpc -i wlan0
 
-# assume network started after this line
+# network started after this line
 
 # wget
 
 # extract http client content
 # /tmp/powersupply-pi-client
 # unzip -o /overlay/react_client.zip -d /tmp
-ln -s /overlay/www /tmp/www
+cp -R /overlay/www /tmp/www
 
 
 # init http server
