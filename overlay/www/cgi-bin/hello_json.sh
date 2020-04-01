@@ -57,14 +57,14 @@ echo ""
 
   if [ $ARGX == "off" ]; then
     /overlay/www/cgi-bin/hello_uart_off
+    exit 0
   fi
 
   if [ $ARGX == "on" ]; then
     /overlay/www/cgi-bin/hello_uart
-
     exit 0
   fi
 
 echo "{\"status\":\"failed, cannot find matching function\"}"
 
-exit 0
+exit 1
