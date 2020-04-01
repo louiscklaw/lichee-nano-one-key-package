@@ -33,6 +33,7 @@ else
 fi
 
 cp .config_linux_5_2 ./linux_5_2/.config
+chmod 777 ./linux_5_2/.config
 
 rm -rf $LINUX_VER/arch/arm/boot/zImage
 
