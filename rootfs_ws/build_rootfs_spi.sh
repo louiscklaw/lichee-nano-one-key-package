@@ -76,10 +76,9 @@ cd /root
 cd output
 
   sudo rm -rf ./rootfs
-  sudo rm -rf ./jffs2.img
-
   mkdir -p rootfs
-
   sudo tar xf rootfs.tar -C ./rootfs
+
+  sudo rm -rf ./jffs2.img
   # sudo rm rootfs.tar
 cd -
