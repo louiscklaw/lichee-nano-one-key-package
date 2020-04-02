@@ -38,7 +38,7 @@ $ docker run -it -v $PWD:/root logickee/licheepi-nano-build bash
 $ ./init.sh
 ```
 
-### to build docker image
+### to build docker image `build_docker_image.sh`
 ```
 $ cd .docker
 $ docker build -f ./docker_lichee_builder.yml . -t logickee/licheepi-nano-build

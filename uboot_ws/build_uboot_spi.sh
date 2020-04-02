@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH
 
 # git clone https://github.com/Lichee-Pi/u-boot.git -b nano-v2018.01
@@ -14,6 +16,7 @@ cd u-boot
   ls -lh u-boot-sunxi-with-spl.bin
 
   # cp ../.config_spi ./.config
+  chown 1000:1000 ./.config
 
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- licheepi_nano_spiflash_defconfig
 
@@ -25,7 +28,8 @@ cd u-boot
   printf "\nlist output file\n"
   ls -lh u-boot-sunxi-with-spl.bin
 
-  cp ./.config ../.config_spi_backup
+  cp ./.config ../.config/.config
+  chown 1000:1000 ./.config ../.config/.config
 
 cd ..
 

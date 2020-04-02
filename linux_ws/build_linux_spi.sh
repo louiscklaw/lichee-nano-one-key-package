@@ -32,9 +32,6 @@ else
   git clone -b nano-5.2-flash --depth=10 https://github.com/Lichee-Pi/linux.git  linux_5_2
 fi
 
-cp .config_linux_5_2 ./linux_5_2/.config
-chmod 777 ./linux_5_2/.config
-
 rm -rf $LINUX_VER/arch/arm/boot/zImage
 
 # cp ./dts_file/suniv-f1c100s-licheepi-nano.dts ./linux_5_2/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
@@ -42,8 +39,11 @@ rm -rf $LINUX_VER/arch/arm/boot/zImage
 cp ./dts_file/suniv-f1c100s.dtsi ./linux_5_2/arch/arm/boot/dts/suniv-f1c100s.dtsi
 cp ./dts_file/suniv-f1c100s-licheepi-nano.dts ./linux_5_2/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
 
+chown 1000:1000 -R ./dts_file
 
 cd $LINUX_VER
+  cp ../.config/.config_linux_5_2 .config
+
   # LINUX_VER=linux_4_15
 
 
@@ -69,6 +69,11 @@ cd $LINUX_VER
   # printf "\nbuild dts\n"
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- dtbs -j6
 
+  cp ./.config ../.config/.config_spi_backup
+  cp ./.config ../.config/.config
+  chown 1000:1000 ./.config
+  chown 1000:1000 -R ../.config
+  chown 1000:1000 -R .
 cd ..
 
 cp $LINUX_VER/arch/arm/boot/zImage ../output
@@ -80,7 +85,8 @@ md5sum $LINUX_VER/arch/arm/boot/zImage
 
 
 cd $LINUX_VER
-  printf "\nmodules\n"
+  # build modules
+
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules -j6
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules_install -j6 INSTALL_MOD_PATH=../../output/rootfs/
 
@@ -98,7 +104,6 @@ cd $LINUX_VER
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../../esp8089_ws/esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=$OUT modules
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j M=../../esp8089_ws/esp8089 CONFIG_ESP8089=m INSTALL_MOD_PATH=$OUT modules_install
 
-  cp ./.config ../.config_spi_backup
 cd ..
 
 
