@@ -14,6 +14,7 @@ then
   echo "download buildroot"
   wget https://buildroot.org/downloads/$BUILD_ROOT_VER.tar.gz
   tar xvf $BUILD_ROOT_VER.tar.gz
+  rm -rf $BUILD_ROOT_VER.tar.gz
 fi
 
 # wget https://buildroot.org/downloads/buildroot-2017.08.tar.gz
@@ -38,25 +39,38 @@ sudo rm -rf ../output/rootfs.tar
 #   # cd ..
 # fi
 
+
 cd $BUILD_ROOT_VER
-  printf "\ncompile new copy\n"
+  # start buildroot
+
+  # copy config
+  cp ../.config/.config_spi_backup .config
+  chown 1000:1000 .config
+
+  mkdir -p ./package/busybox
+  cp ../.config/busybox.config ./package/busybox/busybox.config
+  chown 1000:1000 ./package/busybox/busybox.config
+
+  # compile new copy
+  # TODO: resume me
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
 
-cd ..
+cd -
 
-printf "\ncheck new file exists ?\n"
+# check new file exists ?
 ls -lh $BUILD_ROOT_VER/output/images/rootfs.tar
 
-printf "\nupdate rootfs.tar in output directory\n"
+# update rootfs.tar in output directory
 cp $BUILD_ROOT_VER/output/images/rootfs.tar ../output
 
-printf "\ncompile complete, backup current config\n"
-cp ./$BUILD_ROOT_VER/.config ../.config_spi_backup
+# compile complete, backup current config
+cp ./$BUILD_ROOT_VER/.config ./.config/.config_spi_backup
+chown 1000:1000 -R ./.config
 
 # goto project root directory
-cd ..
+cd /root
 
-printf "\nmove rootfs.tar to output directory\n"
+# move rootfs.tar to output directory
 cd output
 
   sudo rm -rf ./rootfs
@@ -66,4 +80,4 @@ cd output
 
   sudo tar xf rootfs.tar -C ./rootfs
   # sudo rm rootfs.tar
-cd ..
+cd -

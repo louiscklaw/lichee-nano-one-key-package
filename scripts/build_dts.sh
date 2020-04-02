@@ -16,4 +16,4 @@ cd /root
   cd ..
 cd ..
 
-echo "dts done"
+# dts done

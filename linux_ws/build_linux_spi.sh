@@ -43,6 +43,7 @@ chown 1000:1000 -R ./dts_file
 
 cd $LINUX_VER
   cp ../.config/.config_linux_5_2 .config
+  chown 1000:1000 .config
 
   # LINUX_VER=linux_4_15
 
@@ -85,7 +86,8 @@ md5sum $LINUX_VER/arch/arm/boot/zImage
 
 
 cd $LINUX_VER
-  printf "\nmodules\n"
+  # build modules
+
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules -j6
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- modules_install -j6 INSTALL_MOD_PATH=../../output/rootfs/
 

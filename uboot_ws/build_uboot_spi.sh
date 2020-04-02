@@ -16,6 +16,7 @@ cd u-boot
   ls -lh u-boot-sunxi-with-spl.bin
 
   # cp ../.config_spi ./.config
+  chown 1000:1000 ./.config
 
   # make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- licheepi_nano_spiflash_defconfig
 
