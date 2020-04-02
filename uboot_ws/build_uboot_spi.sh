@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH
 
 # git clone https://github.com/Lichee-Pi/u-boot.git -b nano-v2018.01
