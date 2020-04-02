@@ -4,6 +4,11 @@
 # in directory /home/logic/_workspace/lichee-nano-one-key-package/overlay
 set -xe
 
+safe_sync () {
+  sync
+  sleep 0.05
+}
+
 wgetfile () {
   TMP_PATH=/tmp/$1
   OVERLAY_PATH=/overlay/$1
@@ -11,14 +16,14 @@ wgetfile () {
   echo "wget file: $1"
   echo ""
   wget http://192.168.99.253:8000/$1 -O $TMP_PATH
-  sync
+  safe_sync
 
   rm -rf $OVERLAY_PATH
   mv $TMP_PATH $OVERLAY_PATH
-  sync
+  safe_sync
   chmod +x $OVERLAY_PATH
 
-  sync
+  safe_sync
 }
 
 updateclient () {
@@ -30,10 +35,23 @@ updateclient () {
 
   cd /overlay
     unzip -o $OVERLAY_PATH -d /tmp/www
-
   cd -
 
-  sync
+  safe_sync
+}
+
+updateinitd () {
+  TARGET_FILE=$1
+  TMP_PATH=/tmp/$TARGET_FILE
+  OVERLAY_PATH=/overlay/$TARGET_FILE
+  INIT_PATH=/etc/init.d/$TARGET_FILE
+
+  wget http://192.168.99.253:8000/init.d/$1 -O $TMP_PATH
+  chmod +x $TMP_PATH
+
+  mv $TMP_PATH $INIT_PATH
+
+  safe_sync
 }
 
 cd /overlay
@@ -44,9 +62,6 @@ cd /overlay
   mkdir -p /tmp/www/cgi-bin
   wgetfile www/cgi-bin/refresh.sh
   # wget http://192.168.99.253:8000/www/cgi-bin/refresh.sh -O /tmp/www/cgi-bin/refresh.sh
-
-  updateclient
-  # wget http://192.168.99.253:8000/react_client.zip -O /tmp/react_client.zip
 
 cd ..
 
@@ -89,26 +104,36 @@ cd /overlay
 cd ..
 
 cd /etc
-  wget http://192.168.99.253:8000/init.d/S11dps_files_link -O /tmp/S11dps_files_link
-  chmod +x /tmp/S11dps_files_link
-  rm -rf S11dps_files_link
-  mv /tmp/S11dps_files_link /etc/init.d/S11dps_files_link
-  sleep 0.5
+  # wget http://192.168.99.253:8000/init.d/S11dps_files_link -O /tmp/S11dps_files_link
+  # chmod +x /tmp/S11dps_files_link
+  # rm -rf S11dps_files_link
+  # mv /tmp/S11dps_files_link /etc/init.d/S11dps_files_link
+  # sleep 0.5
 
-  wget http://192.168.99.253:8000/init.d/S10dps_mount -O /tmp/S10dps_mount
-  chmod +x /tmp/S10dps_mount
-  rm -rf S10dps_mount
-  mv /tmp/S10dps_mount /etc/init.d/S10dps_mount
+  updateinitd S90_start_wifi
+  updateinitd S91_extract_client
+  updateinitd S92_start_uhttpd
+  updateinitd S99init_powersupply_pi
 
-  wget http://192.168.99.253:8000/init.d/S99init_powersupply_pi -O /tmp/S99init_powersupply_pi
-  chmod +x /tmp/S99init_powersupply_pi
-  rm -rf S99init_powersupply_pi
-  mv /tmp/S99init_powersupply_pi /etc/init.d/S99init_powersupply_pi
-  sleep 0.5
+  # wget http://192.168.99.253:8000/init.d/S10dps_mount -O /tmp/S10dps_mount
+  # chmod +x /tmp/S10dps_mount
+  # rm -rf S10dps_mount
+  # mv /tmp/S10dps_mount /etc/init.d/S10dps_mount
+
+  # wget http://192.168.99.253:8000/init.d/S99init_powersupply_pi -O /tmp/S99init_powersupply_pi
+  # chmod +x /tmp/S99init_powersupply_pi
+  # rm -rf S99init_powersupply_pi
+  # mv /tmp/S99init_powersupply_pi /etc/init.d/S99init_powersupply_pi
+  # sleep 0.5
 
 cd ..
 
+cd /overlay
+  # wget http://192.168.99.253:8000/react_client.zip -O /tmp/react_client.zip
+  updateclient
 
-sync
+cd -
+
+safe_sync
 
 echo "done"

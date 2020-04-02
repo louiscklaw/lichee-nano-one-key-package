@@ -4,6 +4,10 @@
 
 set -e
 
-cd /overlay
-  sh init_main.sh
-cd ..
+# cd /overlay
+#   sh init_main.sh
+# cd ..
+
+
+/overlay/get_stat.sh > /overlay/stat.txt
+./utils/send_slack_module_ready.sh

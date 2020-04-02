@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+set -xe
+
+echo "extract react client here"
+
+cp -R /overlay/www /tmp/www
+
+echo "done"
