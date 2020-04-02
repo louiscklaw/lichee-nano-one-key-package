@@ -27,24 +27,24 @@ echo ""
   for i in $Args ;do
 
 #       Set the field separator to =
-        IFS="${OIFS}="
-        set $i
-        IFS="${OIFS}"
+    IFS="${OIFS}="
+    set $i
+    IFS="${OIFS}"
 
-        case $1 in
-                # Don't allow "/" changed to " ". Prevent hacker problems.
-                namex) ARGX="`echo $2 | sed 's|[\]||g' | sed 's|%20| |g'`"
-                       ;;
-                # Filter for "/" not applied here
-                namey) ARGY="`echo $2 | sed 's|%20| |g'`"
-                       ;;
-                namez) ARGZ="${2/\// /}"
-                       ;;
-                *)     echo "<hr>Warning:"\
-                            "<br>Unrecognized variable \'$1\' passed by FORM in QUERY_STRING.<hr>"
-                       ;;
+    case $1 in
+      # Don't allow "/" changed to " ". Prevent hacker problems.
+      namex) ARGX="`echo $2 | sed 's|[\]||g' | sed 's|%20| |g'`"
+              ;;
+      # Filter for "/" not applied here
+      namey) ARGY="`echo $2 | sed 's|%20| |g'`"
+              ;;
+      namez) ARGZ="${2/\// /}"
+              ;;
+      *)     echo "<hr>Warning:"\
+                  "<br>Unrecognized variable \'$1\' passed by FORM in QUERY_STRING.<hr>"
+              ;;
 
-        esac
+    esac
   done
 
   # echo 'Parsed Values:'
