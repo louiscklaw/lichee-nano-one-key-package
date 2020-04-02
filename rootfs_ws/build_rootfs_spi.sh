@@ -55,6 +55,8 @@ cd $BUILD_ROOT_VER
   # TODO: resume me
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
 
+
+  chown 1000:1000 -R .
 cd -
 
 # check new file exists ?

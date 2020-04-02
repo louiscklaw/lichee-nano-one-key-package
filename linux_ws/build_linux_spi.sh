@@ -43,7 +43,6 @@ chown 1000:1000 -R ./dts_file
 
 cd $LINUX_VER
   cp ../.config/.config_linux_5_2 .config
-  chown 1000:1000 .config
 
   # LINUX_VER=linux_4_15
 
@@ -74,7 +73,7 @@ cd $LINUX_VER
   cp ./.config ../.config/.config
   chown 1000:1000 ./.config
   chown 1000:1000 -R ../.config
-
+  chown 1000:1000 -R .
 cd ..
 
 cp $LINUX_VER/arch/arm/boot/zImage ../output
