@@ -110,6 +110,9 @@ cd /etc
   # mv /tmp/S11dps_files_link /etc/init.d/S11dps_files_link
   # sleep 0.5
 
+  updateinitd S10dps_mount
+  updateinitd S11dps_files_link
+
   updateinitd S90_start_wifi
   updateinitd S91_extract_client
   updateinitd S92_start_uhttpd

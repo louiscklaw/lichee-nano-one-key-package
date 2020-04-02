@@ -4,6 +4,13 @@ set -xe
 
 echo "extract react client here"
 
-cp -R /overlay/www /tmp/www
+
+mkdir -p /tmp/www/cgi-bin
+
+cp -R /overlay/www/cgi-bin/* /tmp/www/cgi-bin
+
+unzip -o /overlay/react_client.zip -d /tmp/www
+
+sync
 
 echo "done"

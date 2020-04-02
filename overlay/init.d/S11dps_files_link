@@ -10,8 +10,8 @@ rm -rf /root/.ssh
 rm -rf /root/id_rsa
 rm -rf /root/id_rsa.pub
 
-sleep 0.1
-
 ln -s /overlay/.ssh /root/.ssh
 ln -s /overlay/.ssh/id_rsa /root/id_rsa
 ln -s /overlay/.ssh/id_rsa.pub /root/id_rsa.pub
+
+sync

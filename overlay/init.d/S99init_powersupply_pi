@@ -10,4 +10,6 @@ set -e
 
 
 /overlay/get_stat.sh > /overlay/stat.txt
-./utils/send_slack_module_ready.sh
+/overlay/utils/send_slack_module_ready.sh
+
+sync
