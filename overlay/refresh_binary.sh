@@ -43,16 +43,6 @@ cd /etc
 cd ..
 
 cd /overlay/www
-  # hello_json.sh
-  wget http://192.168.99.253:8000/www/cgi-bin/hello_json.sh -O /tmp/hello_json.sh
-  chmod +x /tmp/hello_json.sh
-
-  rm -rf /overlay/www/cgi-bin/hello_json.sh
-  mv /tmp/hello_json.sh /overlay/www/cgi-bin/hello_json.sh
-  cp /overlay/www/cgi-bin/hello_json.sh /tmp/www/cgi-bin/hello_json.sh
-  sleep 0.5
-  rm -rf /tmp/hello_json.sh
-
   # index.html
   wget http://192.168.99.253:8000/www/index.html -O /tmp/index.html
   chmod +x /tmp/index.html
@@ -65,29 +55,42 @@ cd /overlay/www
 cd ../..
 
 cd /overlay/www/cgi-bin
-  rm -rf set_voltage
+  # hello_json.sh
+  rm -rf /tmp/hello_json.sh
+  wget http://192.168.99.253:8000/www/cgi-bin/hello_json.sh -O /tmp/hello_json.sh
+  chmod +x /tmp/hello_json.sh
+
+  rm -rf /overlay/www/cgi-bin/hello_json.sh
+  mv /tmp/hello_json.sh /overlay/www/cgi-bin/hello_json.sh
+  cp /overlay/www/cgi-bin/hello_json.sh /tmp/www/cgi-bin/hello_json.sh
+  sleep 0.5
+
+  rm -rf /tmp/set_voltage
   wget http://192.168.99.253:8000/www/cgi-bin/set_voltage -O /tmp/set_voltage
   chmod +x /tmp/set_voltage
   rm -rf /overlay/www/cgi-bin/set_voltage
   mv /tmp/set_voltage /overlay/www/cgi-bin/set_voltage
+  cp /overlay/www/cgi-bin/set_voltage /tmp/www/cgi-bin/set_voltage
   sleep 0.5
 
   # /home/logic/_workspace/lichee-nano-one-key-package/overlay/www/cgi-bin/change_settings.sh
-  rm -rf change_settings.sh
+  rm -rf /tmp/change_settings.sh
   wget http://192.168.99.253:8000/www/cgi-bin/change_settings.sh -O /tmp/change_settings.sh
   chmod +x /tmp/change_settings.sh
   rm -rf /overlay/www/cgi-bin/change_settings.sh
   mv /tmp/change_settings.sh /overlay/www/cgi-bin/change_settings.sh
   sleep 0.5
+  cp /overlay/www/cgi-bin/change_settings.sh /tmp/www/cgi-bin/change_settings.sh
+  rm -rf /tmp/change_settings.sh
 
   # /home/logic/_workspace/lichee-nano-one-key-package/overlay/www/cgi-bin/change_settings.sh
-  rm -rf hello_uart_off
+  rm -rf /tmp/hello_uart_off
   wget http://192.168.99.253:8000/www/cgi-bin/hello_uart_off -O /tmp/hello_uart_off
   chmod +x /tmp/hello_uart_off
   rm -rf /overlay/www/cgi-bin/hello_uart_off
   mv /tmp/hello_uart_off /overlay/www/cgi-bin/hello_uart_off
-  cp /overlay/www/cgi-bin/hello_uart_off /tmp/www/cgi-bin/hello_uart_off
   sleep 0.5
+  cp /overlay/www/cgi-bin/hello_uart_off /tmp/www/cgi-bin/hello_uart_off
 
 cd ../../..
 
