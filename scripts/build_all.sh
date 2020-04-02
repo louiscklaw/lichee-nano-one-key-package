@@ -42,26 +42,27 @@ fi
 
 cd /root
   cd scripts
-    if [ -z "$INSTALL_BUILD_TOOLS" ]
-    then
-      echo "skipping install tools"
-    else
-      ./init.sh | tee init.log
-    fi
+    # TODO: resume me
+    # if [ -z "$INSTALL_BUILD_TOOLS" ]
+    # then
+    #   echo "skipping install tools"
+    # else
+    #   ./init.sh | tee init.log
+    # fi
 
     if [ -n "$SEQUENTIAL_BUILD" ]
     then
       echo "start sequential build"
-      ./build_zImage.sh | tee build_zImage.log
+      # ./build_zImage.sh | tee build_zImage.log
       ./build_dts.sh | tee build_dts.log
-      ./build_uboot.sh  | tee build_uboot.log
-      ./build_rootfs.sh | tee build_rootfs.log
+      # ./build_uboot.sh  | tee build_uboot.log
+      # ./build_rootfs.sh | tee build_rootfs.log
     else
       echo "start parallel build"
-      ./build_zImage.sh | tee build_zImage.log &
+      # ./build_zImage.sh | tee build_zImage.log &
       ./build_dts.sh | tee build_dts.log &
-      ./build_uboot.sh  | tee build_uboot.log &
-      ./build_rootfs.sh | tee build_rootfs.log &
+      # ./build_uboot.sh  | tee build_uboot.log &
+      # ./build_rootfs.sh | tee build_rootfs.log &
       wait
     fi
 

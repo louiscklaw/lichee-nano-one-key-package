@@ -20,14 +20,19 @@ sleep 10
 
 udhcpc -i wlan0
 
-# assume network started after this line
+# network started after this line
+
+# wget
 
 # extract http client content
-unzip /overlay/react_client.zip -d /tmp
+# /tmp/powersupply-pi-client
+# unzip -o /overlay/react_client.zip -d /tmp
+cp -R /overlay/www /tmp/www
+
 
 # init http server
 # uhttpd -p 80 -h /overlay/www
-uhttpd -p 80 -h /tmp/powersupply-pi-client/build
+uhttpd -p 80 -h /tmp/www
 ./utils/send_slack_httpd_started.sh
 
 /overlay/get_stat.sh > /overlay/stat.txt
