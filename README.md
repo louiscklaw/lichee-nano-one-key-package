@@ -1,5 +1,12 @@
 # README.md
 
+### build status
+| master                                                                                                                                                          | develop                                                                                                                                                          |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [![Build Status](https://travis-ci.com/louiscklaw/lichee-nano-one-key-package.svg?branch=master)](https://travis-ci.com/louiscklaw/lichee-nano-one-key-package) | [![Build Status](https://travis-ci.com/louiscklaw/lichee-nano-one-key-package.svg?branch=develop)](https://travis-ci.com/louiscklaw/lichee-nano-one-key-package) |
+|                                                                                                                                                                 |                                                                                                                                                                  |
+|                                                                                                                                                                 |                                                                                                                                                                  |
+
 ### build process
 - get docker image
 - build inside docker

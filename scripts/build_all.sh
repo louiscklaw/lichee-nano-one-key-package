@@ -21,6 +21,12 @@ else
 
   # setup RENEW_GIT_SOURCE
   export RENEW_GIT_SOURCE=1
+
+  echo "setup SEQUENTIAL_BUILD"
+  export SEQUENTIAL_BUILD=1
+
+  echo "setup DOWNLOAD_BUILDROOT "
+  export DOWNLOAD_BUILDROOT=1
 fi
 
 if [ -z "$DOCKER_ENVIRONEMNT" ]
@@ -42,17 +48,22 @@ cd /root
       ./init.sh | tee init.log
     fi
 
-    ./build_zImage.sh | tee build_zImage.log &
-    ./build_rootfs.sh | tee build_rootfs.log &
-    ./build_uboot.sh  | tee build_uboot.log &
-    ./build_dts.sh | tee build_dts.log &
 
-
-    wait
-
-    # it must compile after ready
-    ./build_powersupply_pi.sh  | tee build_powersupply_pi.log
-
+    if [ -n "$SEQUENTIAL_BUILD" ]
+    then
+      echo "start sequential build"
+      ./build_dts.sh | tee build_dts.log
+      ./build_zImage.sh | tee build_zImage.log
+      ./build_rootfs.sh | tee build_rootfs.log
+      ./build_uboot.sh  | tee build_uboot.log
+    else
+      echo "start parallel build"
+      ./build_dts.sh | tee build_dts.log &
+      ./build_zImage.sh | tee build_zImage.log &
+      ./build_rootfs.sh | tee build_rootfs.log &
+      ./build_uboot.sh  | tee build_uboot.log &
+      wait
+    fi
   cd ..
 
 
