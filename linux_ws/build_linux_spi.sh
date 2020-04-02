@@ -114,4 +114,6 @@ cd ..
 # cp $LINUX_VER/drivers/net/wireless/esp8089_driver/esp8089.ko ../output
 # md5sum $LINUX_VER/drivers/net/wireless/esp8089_driver/esp8089.ko
 
+chown 1000:1000 -R $LINUX_VER
+
 exit 0

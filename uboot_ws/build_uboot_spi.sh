@@ -22,7 +22,7 @@ cd u-boot
 
   # make ARCH=arm menuconfig
   # cp ./.config ../.config_spi
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j2
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j4
 
   # list output file
   printf "\nlist output file\n"
@@ -31,8 +31,11 @@ cd u-boot
   cp ./.config ../.config/.config
   chown 1000:1000 ./.config ../.config/.config
 
-cd ..
+cd -
 
 cp u-boot/u-boot-sunxi-with-spl.bin ../output
+
+# fallback permissions
+chown 1000:1000 -R u-boot
 
 exit 0

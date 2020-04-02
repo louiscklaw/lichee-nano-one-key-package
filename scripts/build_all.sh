@@ -56,8 +56,8 @@ cd /root
       echo "start parallel build"
       ./build_zImage.sh | tee build_zImage.log &
       ./build_dts.sh | tee build_dts.log &
-      ./build_rootfs.sh | tee build_rootfs.log &
       ./build_uboot.sh  | tee build_uboot.log &
+      ./build_rootfs.sh | tee build_rootfs.log &
       wait
     fi
 

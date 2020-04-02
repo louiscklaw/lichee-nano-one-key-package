@@ -52,7 +52,6 @@ cd $BUILD_ROOT_VER
   chown 1000:1000 ./package/busybox/busybox.config
 
   # compile new copy
-  # TODO: resume me
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
 
 
@@ -67,7 +66,8 @@ cp $BUILD_ROOT_VER/output/images/rootfs.tar ../output
 
 # compile complete, backup current config
 cp ./$BUILD_ROOT_VER/.config ./.config/.config_spi_backup
-chown 1000:1000 -R ./.config
+
+chown 1000:1000 -R $BUILD_ROOT_VER
 
 # goto project root directory
 cd /root
