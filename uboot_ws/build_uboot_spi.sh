@@ -27,7 +27,8 @@ cd u-boot
   printf "\nlist output file\n"
   ls -lh u-boot-sunxi-with-spl.bin
 
-  cp ./.config ../.config_spi_backup
+  cp ./.config ../.config/.config
+  chown 1000:1000 ./.config ../.config/.config
 
 cd ..
 
