@@ -11,19 +11,19 @@ then
 else
   # # build on travis
   # echo "setup INSTALL_BUILD_TOOLS"
-  # export INSTALL_BUILD_TOOLS=1
+  export INSTALL_BUILD_TOOLS=1
 
   # echo "setup CLEAR_WORKSPACE_BEFORE_BUILD"
-  # export CLEAR_WORKSPACE_BEFORE_BUILD=1
+  export CLEAR_WORKSPACE_BEFORE_BUILD=1
 
   # echo "setup RENEW_GIT_SOURCE"
-  # export RENEW_GIT_SOURCE=1
+  export RENEW_GIT_SOURCE=1
 
   # echo "setup SEQUENTIAL_BUILD"
   # export SEQUENTIAL_BUILD=1
 
   # echo "setup DOWNLOAD_BUILDROOT "
-  # export DOWNLOAD_BUILDROOT=1
+  export DOWNLOAD_BUILDROOT=1
 
   set -e
 fi
@@ -42,16 +42,16 @@ cd /root
     then
       echo "skipping install tools"
     else
-      ./init.sh > init.log
+      ./init.sh | tee init.log
     fi
 
     if [ -n "$SEQUENTIAL_BUILD" ]
     then
       echo "start sequential build"
-      # ./build_zImage.sh > build_zImage.log
-      # ./build_dts.sh > build_dts.log
-      # ./build_uboot.sh  > build_uboot.log
-      # ./build_rootfs.sh > build_rootfs.log
+      ./build_zImage.sh | tee build_zImage.log
+      ./build_dts.sh | tee build_dts.log
+      ./build_uboot.sh  | tee build_uboot.log
+      ./build_rootfs.sh | tee build_rootfs.log
     else
       echo "start parallel build"
       ./build_zImage.sh | tee build_zImage.log &
@@ -60,9 +60,8 @@ cd /root
       ./build_uboot.sh  | tee build_uboot.log &
       wait
     fi
+
   cd ..
-
-
 cd ..
 
 echo "build all done"
