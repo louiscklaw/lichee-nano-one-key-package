@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot 2019.11.1-gd3c31ba-dirty Configuration
+# Buildroot 2019.11.1-g2193c57 Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 BR2_HOST_GCC_AT_LEAST_4_9=y
@@ -2635,6 +2635,7 @@ BR2_PACKAGE_QEMU_ARCH_SUPPORTS_TARGET=y
 # asterisk needs a glibc or uClibc toolchain w/ C++, dynamic library, threads, wchar
 #
 # BR2_PACKAGE_ATFTP is not set
+# BR2_PACKAGE_AUTOSSH is not set
 # BR2_PACKAGE_AVAHI is not set
 # BR2_PACKAGE_AXEL is not set
 # BR2_PACKAGE_BABELD is not set
@@ -2699,7 +2700,14 @@ BR2_PACKAGE_QEMU_ARCH_SUPPORTS_TARGET=y
 # BR2_PACKAGE_DHCPDUMP is not set
 # BR2_PACKAGE_DNSMASQ is not set
 # BR2_PACKAGE_DRBD_UTILS is not set
-# BR2_PACKAGE_DROPBEAR is not set
+BR2_PACKAGE_DROPBEAR=y
+BR2_PACKAGE_DROPBEAR_CLIENT=y
+# BR2_PACKAGE_DROPBEAR_DISABLE_REVERSEDNS is not set
+BR2_PACKAGE_DROPBEAR_SMALL=y
+# BR2_PACKAGE_DROPBEAR_WTMP is not set
+# BR2_PACKAGE_DROPBEAR_LASTLOG is not set
+# BR2_PACKAGE_DROPBEAR_LEGACY_CRYPTO is not set
+BR2_PACKAGE_DROPBEAR_LOCALOPTIONS_FILE=""
 # BR2_PACKAGE_EBTABLES is not set
 
 #
@@ -3024,35 +3032,35 @@ BR2_PACKAGE_WPA_SUPPLICANT_DBUS_INTROSPECTION=y
 #
 
 #
-# Please note:
+# Please note:                                           
 #
 
 #
-# - Buildroot does *not* generate binary packages,
+# - Buildroot does *not* generate binary packages,       
 #
 
 #
-# - Buildroot does *not* install any package database.
+# - Buildroot does *not* install any package database.   
 #
 
 #
-# *
+# *                                                      
 #
 
 #
-# It is up to you to provide those by yourself if you
+# It is up to you to provide those by yourself if you    
 #
 
 #
-# want to use any of those package managers.
+# want to use any of those package managers.             
 #
 
 #
-# *
+# *                                                      
 #
 
 #
-# See the manual:
+# See the manual:                                        
 #
 
 #
@@ -3252,11 +3260,11 @@ BR2_PACKAGE_SYSTEMD_BOOTCHART_ARCH_SUPPORTS=y
 # unscd needs a glibc toolchain
 #
 BR2_PACKAGE_UTIL_LINUX=y
-# BR2_PACKAGE_UTIL_LINUX_LIBBLKID is not set
+BR2_PACKAGE_UTIL_LINUX_LIBBLKID=y
 # BR2_PACKAGE_UTIL_LINUX_LIBFDISK is not set
-# BR2_PACKAGE_UTIL_LINUX_LIBMOUNT is not set
+BR2_PACKAGE_UTIL_LINUX_LIBMOUNT=y
 # BR2_PACKAGE_UTIL_LINUX_LIBSMARTCOLS is not set
-# BR2_PACKAGE_UTIL_LINUX_LIBUUID is not set
+BR2_PACKAGE_UTIL_LINUX_LIBUUID=y
 # BR2_PACKAGE_UTIL_LINUX_BINARIES is not set
 # BR2_PACKAGE_UTIL_LINUX_AGETTY is not set
 # BR2_PACKAGE_UTIL_LINUX_BFS is not set
@@ -3289,7 +3297,7 @@ BR2_PACKAGE_UTIL_LINUX=y
 # BR2_PACKAGE_UTIL_LINUX_MESG is not set
 # BR2_PACKAGE_UTIL_LINUX_MINIX is not set
 # BR2_PACKAGE_UTIL_LINUX_MORE is not set
-# BR2_PACKAGE_UTIL_LINUX_MOUNT is not set
+BR2_PACKAGE_UTIL_LINUX_MOUNT=y
 # BR2_PACKAGE_UTIL_LINUX_MOUNTPOINT is not set
 # BR2_PACKAGE_UTIL_LINUX_NEWGRP is not set
 # BR2_PACKAGE_UTIL_LINUX_NOLOGIN is not set

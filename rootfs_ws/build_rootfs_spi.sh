@@ -9,6 +9,13 @@ printf "\nstart building rootfs\n"
 
 export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH
 
+if [ -n "$DOWNLOAD_BUILDROOT" ]
+then
+  echo "download buildroot"
+  wget https://buildroot.org/downloads/$BUILD_ROOT_VER.tar.gz
+  tar xvf $BUILD_ROOT_VER.tar.gz
+fi
+
 # wget https://buildroot.org/downloads/buildroot-2017.08.tar.gz
 # rm -rf rootfs_ws/buildroot-2019.11.1
 # wget https://buildroot.org/downloads/$BUILD_ROOT_VER.tar.gz
@@ -20,10 +27,18 @@ export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/
 
 sudo rm -rf ../output/rootfs.tar
 
-cd $BUILD_ROOT_VER
-  printf "\ncleaning...\n"
-  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- clean -j20
+# echo "CLEAR_WORKSPACE_BEFORE_BUILD checking... "
+# if [ -z "$CLEAR_WORKSPACE_BEFORE_BUILD" ]
+# then
+#   echo "skipping cleaning for rootfs"
+# else
+#   # cd $BUILD_ROOT_VER
+#   #   printf "\ncleaning...\n"
+#   #   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- clean -j20
+#   # cd ..
+# fi
 
+cd $BUILD_ROOT_VER
   printf "\ncompile new copy\n"
   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
 

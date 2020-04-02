@@ -140,26 +140,32 @@
 
 			partition@0 {
 				label = "u-boot";
-				reg = <0x000000 0x100000>;
+				reg = <0x000000 0x70000>;
 				read-only;
 			};
 
-			partition@100000 {
+			partition@70000 {
 				label = "dtb";
-				reg = <0x100000 0x10000>;
+				reg = <0x70000 0x10000>;
 				read-only;
 			};
 
-			partition@110000 {
+			partition@80000 {
 				label = "kernel";
-				reg = <0x110000 0x500000>;
+				reg = <0x80000 0x430000>;
 				read-only;
 			};
 
-			partition@610000 {
+			partition@4B0000 {
 				label = "rootfs";
-				reg = <0x610000 0xAF0000>;
+				reg = <0x4B0000 0xA40000>;
 			};
+
+      partition@EF0000 {
+        label = "overlayfs";
+        reg = <0xEF0000 0x110000>;
+      };
+
 		};
 	};
 };
@@ -180,6 +186,12 @@
 &uart0 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&uart0_pe_pins>;
+	status = "okay";
+};
+
+&uart1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart1_pins_a>;
 	status = "okay";
 };
 

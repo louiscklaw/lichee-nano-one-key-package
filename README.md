@@ -1,20 +1,74 @@
 # README.md
 
+### build status
+| master                                                                                                                                                          | develop                                                                                                                                                          |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [![Build Status](https://travis-ci.com/louiscklaw/lichee-nano-one-key-package.svg?branch=master)](https://travis-ci.com/louiscklaw/lichee-nano-one-key-package) | [![Build Status](https://travis-ci.com/louiscklaw/lichee-nano-one-key-package.svg?branch=develop)](https://travis-ci.com/louiscklaw/lichee-nano-one-key-package) |
+|                                                                                                                                                                 |                                                                                                                                                                  |
+|                                                                                                                                                                 |                                                                                                                                                                  |
+
+### build process
+- get docker image
+- build inside docker
+- fel to FC100s
+
+### to run docker
 ```
-docker build -f ./docker_lichee_builder.yml . -t logickee/ubuntu
-docker run -it -v $PWD:/root logickee/ubuntu bash
-./init.sh
+$ docker run -it -v $PWD:/root logickee/licheepi-nano-build bash
+
+// inside docker
+$ ./init.sh
+```
+
+### to build docker image
+```
+$ cd .docker
+$ docker build -f ./docker_lichee_builder.yml . -t logickee/licheepi-nano-build
+
+```
+
+### to compile user program
+- ensure the rootfs were compiled and run-able
+- it requires a workable musl compiler from rootfs/host directory
+```
+$ cd my_program
+$ ./build_all.sh
 ```
 
 ```
-dts file: /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/linux_5_2/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
+dts file:
 
+/home/logic/_workspace/lichee-nano-one-key-package/linux_ws/dts_file/suniv-f1c100s-licheepi-nano.dts
+
+
+/home/logic/_workspace/lichee-nano-one-key-package/linux_ws/linux_5_2/arch/arm/boot/dts/suniv-f1c100s.dtsi
+/home/logic/_workspace/lichee-nano-one-key-package/linux_ws/linux_5_2/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
+
+
+
+```
+
+```
+my_program
+my_program/helloworld
+```
+
+
+```
+command to test serial port
+
+cat /dev/ttyS1 & cat > /dev/ttyS1
+cat /dev/ttyS2 & cat > /dev/ttyS2
 ```
 
 ```
 cd /root
 ./build.sh pull_all
 ./build. nano_spiflash
+```
+
+```
+make ARCH=arm menuconfig
 ```
 
 ### NOTES:
