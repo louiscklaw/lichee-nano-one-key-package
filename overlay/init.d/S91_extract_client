@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+set -xe
+
+echo "extract react client here"
+
+
+mkdir -p /tmp/www/cgi-bin
+
+cp -R /overlay/www/cgi-bin/* /tmp/www/cgi-bin
+
+unzip -o /overlay/react_client.zip -d /tmp/www
+
+sync
+
+echo "done"

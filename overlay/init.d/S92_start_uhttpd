@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+set -xe
+
+echo "start uhttpd here"
+
+uhttpd -p 80 -h /tmp/www
+
+/overlay/utils/send_slack_httpd_started.sh
+
+
+sync
+
+echo "done"

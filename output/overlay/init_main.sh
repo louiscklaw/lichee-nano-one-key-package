@@ -1,20 +1,36 @@
 #!/usr/bin/env sh
 
-set -xev
+set -xe
 
 insmod r8723bs.ko
 
 mkdir -p /lib/firmware/rtlwifi
 
-cp rtl8723bs_nic.bin /lib/firmware/rtlwifi
-# ln -s   rtl8723bs_nic.bin /lib/firmware/rtlwifi/rtl8723bs_nic.bin
+# cp rtl8723bs_nic.bin /lib/firmware/rtlwifi
+rm -rf /lib/firmware/rtlwifi/rtl8723bs_nic.bin
+ln -s   /overlay/rtl8723bs_nic.bin /lib/firmware/rtlwifi/rtl8723bs_nic.bin
 
-wpa_supplicant -B -i wlan0 -c /overlay/wpa_supplicant.conf
+mv /etc/wpa_supplicant.conf /etc/wpa_supplicant.conf.buildroot
+ln -s /overlay/wpa_home/wpa_supplicant.conf /etc/wpa_supplicant.conf
+# ln -s /overlay/wpa_home/wpa_supplicant_ap.conf /etc/wpa_supplicant_ap.conf
+
+wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf
 
 sleep 10
 
 udhcpc -i wlan0
 
-uhttpd -p 80 -h /overlay/www
+# assume network started after this line
+
+# extract http client content
+unzip /overlay/react_client.zip -d /tmp
+
+# init http server
+# uhttpd -p 80 -h /overlay/www
+uhttpd -p 80 -h /tmp/powersupply-pi-client/build
+./utils/send_slack_httpd_started.sh
 
 /overlay/get_stat.sh > /overlay/stat.txt
+
+# send done message
+./utils/send_slack_module_ready.sh

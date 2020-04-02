@@ -1,0 +1,15 @@
+#!/usr/bin/sh
+
+# suppose running on /etc/init.d/S99_powersupply_pi
+
+set -e
+
+# cd /overlay
+#   sh init_main.sh
+# cd ..
+
+
+/overlay/get_stat.sh > /overlay/stat.txt
+/overlay/utils/send_slack_module_ready.sh
+
+sync

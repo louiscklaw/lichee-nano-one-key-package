@@ -2,25 +2,29 @@
 
 # https://www.panix.com/~elflord/unix/bash-tute.html
 
+set -e
+
+# export CLEAR_WORKSPACE_BEFORE_BUILD=1
+
+sudo rm -rf /root/rootfs_ws/buildroot-2019.11.1/output/build/busybox-1.31.1/.stamp_built
+
 if [ -z "$CI" ]
 then
   # local build
   echo "skipping install tools"
 
-  set -xe
 else
-  # # build on travis
-  # echo "setup INSTALL_BUILD_TOOLS"
+  # setup INSTALL_BUILD_TOOLS
   export INSTALL_BUILD_TOOLS=1
 
-  # echo "setup CLEAR_WORKSPACE_BEFORE_BUILD"
+  # setup CLEAR_WORKSPACE_BEFORE_BUILD
   export CLEAR_WORKSPACE_BEFORE_BUILD=1
 
-  # echo "setup RENEW_GIT_SOURCE"
+  # setup RENEW_GIT_SOURCE
   export RENEW_GIT_SOURCE=1
 
   # echo "setup SEQUENTIAL_BUILD"
-  # export SEQUENTIAL_BUILD=1
+  export SEQUENTIAL_BUILD=1
 
   # echo "setup DOWNLOAD_BUILDROOT "
   export DOWNLOAD_BUILDROOT=1
@@ -30,8 +34,8 @@ fi
 
 if [ -z "$DOCKER_ENVIRONEMNT" ]
 then
-  echo "ERROR: should be launch inside docker "
-  exit 1
+  # ERROR: should be launch inside docker
+  exit 99
 else
   echo "checked docker environment, continue"
 fi
@@ -64,6 +68,8 @@ cd /root
   cd ..
 cd ..
 
-echo "build all done"
+# build all done
+
+curl -X POST -H 'Content-type: application/json' --data '{"text":"/home/logic/_workspace/lichee-nano-one-key-package build all done!"}' 'https://hooks.slack.com/services/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'
 
 # done

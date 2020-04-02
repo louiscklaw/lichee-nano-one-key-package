@@ -5,7 +5,7 @@ set -xe
 BUILD_ROOT_VER=buildroot-2019.11.1
 # BUILD_ROOT_VER=buildroot-2017.08
 
-printf "\nstart building rootfs\n"
+# start building rootfs
 
 export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH
 

@@ -12,6 +12,24 @@
 - build inside docker
 - fel to FC100s
 
+```
+https://tools.ietf.org/html/rfc3875
+```
+
+```
+find overlay |entr -c -s "cp -r overlay ./output/overlay"
+```
+
+### test command
+```
+➜ curl http://192.168.99.250/cgi-bin/hello_uart
+<h1>Bad Gateway</h1>The process did not produce any response%
+
+➜ curl http://192.168.99.250/cgi-bin/hello_uart_off
+<h1>Bad Gateway</h1>The process did not produce any response%
+
+```
+
 ### to run docker
 ```
 $ docker run -it -v $PWD:/root logickee/licheepi-nano-build bash
@@ -34,6 +52,9 @@ $ docker build -f ./docker_lichee_builder.yml . -t logickee/licheepi-nano-build
 $ cd my_program
 $ ./build_all.sh
 ```
+
+Busybox的设置
+有一些软件包在busybox内是自带的，可以到使用busybox的menuconfig进行配置。需要先运行一次make生成busybox的构建文件夹，然后再使用 make busybox-menuconfig 配置。每次clean后都需要重新配置一次，因为在clean的时候这个配置会被清除。
 
 ```
 dts file:
