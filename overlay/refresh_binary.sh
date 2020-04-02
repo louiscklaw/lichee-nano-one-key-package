@@ -80,6 +80,7 @@ cd /overlay/www/cgi-bin
   wgetfile www/cgi-bin/set_voltage
   wgetfile www/cgi-bin/change_settings.sh
   wgetfile www/cgi-bin/hello_uart_off
+  wgetfile www/cgi-bin/hello_ping
 
 
 cd ../../..
