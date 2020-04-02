@@ -12,6 +12,14 @@ WORKDIR /root
 
 RUN apt-get update
 RUN apt-get install -y tmux sudo git wget curl
+RUN apt-get install -y tmux sudo git wget curl rsync
+RUN apt-get install -y cpio xz-utils
+
+RUN apt-get install -y autoconf automake libtool gettext
+RUN apt-get install -y make gcc g++ swig python-dev bc python u-boot-tools bison flex bc libssl-dev libncurses5-dev unzip mtd-utils
+RUN apt-get install -y libc6-i386 lib32stdc++6 lib32z1
+RUN apt-get install -y libc6 libstdc++6 zlib1g
+RUN apt-get install -y linux-headers-$(uname -r)
 
 # Define default command.
 CMD ["bash"]
