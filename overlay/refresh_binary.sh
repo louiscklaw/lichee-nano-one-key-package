@@ -11,18 +11,42 @@ wgetfile () {
   echo "wget file: $1"
   echo ""
   wget http://192.168.99.253:8000/$1 -O $TMP_PATH
+  sync
+
   rm -rf $OVERLAY_PATH
   mv $TMP_PATH $OVERLAY_PATH
-  sleep 0.1
+  sync
   chmod +x $OVERLAY_PATH
+
+  sync
+}
+
+updateclient () {
+  REACT_ARCHIVE=react_client.zip
+  TMP_PATH=/tmp/$REACT_ARCHIVE
+  OVERLAY_PATH=/overlay/$REACT_ARCHIVE
+
+  wget http://192.168.99.253:8000/$REACT_ARCHIVE -O $OVERLAY_PATH
+
+  cd /overlay
+    unzip -o $OVERLAY_PATH -d /tmp/www
+
+  cd -
+
+  sync
 }
 
 cd /overlay
   wgetfile refresh_binary.sh
   # wget http://192.168.99.253:8000/refresh_binary.sh -O /tmp/refresh_binary.sh
 
+  mkdir -p /overlay/www/cgi-bin
+  mkdir -p /tmp/www/cgi-bin
   wgetfile www/cgi-bin/refresh.sh
   # wget http://192.168.99.253:8000/www/cgi-bin/refresh.sh -O /tmp/www/cgi-bin/refresh.sh
+
+  updateclient
+  # wget http://192.168.99.253:8000/react_client.zip -O /tmp/react_client.zip
 
 cd ..
 
@@ -83,5 +107,8 @@ cd /etc
   sleep 0.5
 
 cd ..
+
+
+sync
 
 echo "done"
