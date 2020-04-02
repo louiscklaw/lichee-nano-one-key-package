@@ -5,4 +5,4 @@ set -xe
 # make clean
 make
 
-cp hello_ping ../../output/overlay
+cp hello_ping /root/overlay/www/cgi-bin/hello_ping

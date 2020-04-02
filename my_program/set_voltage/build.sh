@@ -8,6 +8,6 @@ rm -rf set_voltage
 
 make
 
-cp set_voltage ../../overlay/www/cgi-bin
-chown 1000:1000 ../../overlay/www/cgi-bin/set_voltage
-chmod +x ../../overlay/www/cgi-bin/set_voltage
+cp set_voltage /root/overlay/www/cgi-bin
+chown 1000:1000 /root/overlay/www/cgi-bin/set_voltage
+chmod +x /root/overlay/www/cgi-bin/set_voltage
