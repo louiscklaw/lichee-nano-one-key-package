@@ -70,6 +70,15 @@ cd ..
 
 # build all done
 
-curl -X POST -H 'Content-type: application/json' --data '{"text":"/home/logic/_workspace/lichee-nano-one-key-package build all done!"}' 'https://hooks.slack.com/services/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'
+generate_post_data()
+{
+  HOSTNAME=`hostname`
+cat <<EOF
+  {"text":"$HOSTNAME lichee-nano-one-key-package build all done"}
+EOF
+}
+
+data='{"text":"${page} lichee-nano-one-key-package build all done"}'
+curl -X POST -H 'Content-type: application/json' --data "$(generate_post_data)" $SLACK_DEBUG_WEBHOOK
 
 # done
