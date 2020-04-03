@@ -6,7 +6,7 @@ set -xe
 
 safe_sync () {
   sync
-  sleep 0.05
+  sleep 0.01
 }
 
 wgetfile () {
@@ -114,9 +114,12 @@ cd /etc
   updateinitd S10dps_mount
   updateinitd S11dps_files_link
 
+  updateinitd S13helloworld
+
   updateinitd S90_start_wifi
   updateinitd S91_extract_client
   updateinitd S92_start_uhttpd
+  updateinitd S98gpio_enable
   updateinitd S99init_powersupply_pi
 
   # wget http://192.168.99.253:8000/init.d/S10dps_mount -O /tmp/S10dps_mount
