@@ -1,5 +1,10 @@
 # README.md
 
+### GPIO
+https://whycan.cn/t_1647.html
+http://notes.leconiot.com/gpio_libc.html
+https://blog.csdn.net/Guet_Kite/article/details/82263003
+
 ### build log
 - enable busybox-timeout
 - enable dropbear
