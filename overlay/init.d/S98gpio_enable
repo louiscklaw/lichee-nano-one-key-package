@@ -1,0 +1,43 @@
+#!/bin/sh
+
+start() {
+  printf "Starting GPIO"
+  # gpio130
+  echo 130 > /sys/class/gpio/export
+  echo out > /sys/class/gpio/gpio130/direction
+
+  # gpio131
+  echo 131 > /sys/class/gpio/export
+  echo out > /sys/class/gpio/gpio131/direction
+
+  # gpio132
+  echo 132 > /sys/class/gpio/export
+  echo out > /sys/class/gpio/gpio132/direction
+
+  # gpio133
+  echo 133 > /sys/class/gpio/export
+  echo out > /sys/class/gpio/gpio133/direction
+
+  # gpio137
+  echo 137 > /sys/class/gpio/export
+  echo out > /sys/class/gpio/gpio137/direction
+
+  # gpio138
+  echo 138 > /sys/class/gpio/export
+  echo out > /sys/class/gpio/gpio138/direction
+  return 0
+}
+
+stop () {
+  echo "Stopping gpio"
+  return 0
+}
+
+case $1 in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+esac

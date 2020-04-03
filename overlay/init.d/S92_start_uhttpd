@@ -1,14 +1,28 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
-set -xe
+start() {
+  printf "Starting uhttpd"
 
-echo "start uhttpd here"
+  uhttpd -p 80 -h /tmp/www
 
-uhttpd -p 80 -h /tmp/www
+  /overlay/utils/send_slack_httpd_started.sh
 
-/overlay/utils/send_slack_httpd_started.sh
+  sync
 
+  # done
+}
 
-sync
+stop() {
+  echo "S92_start_uhttpd stoping"
 
-echo "done"
+  echo "S92_start_uhttpd stopped"
+}
+
+case $1 in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+esac

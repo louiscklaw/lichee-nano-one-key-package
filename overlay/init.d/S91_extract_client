@@ -1,16 +1,28 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
-set -xe
+start() {
+  printf "Extracting react client"
 
-echo "extract react client here"
+  [ -d /tmp/www/cgi-bin ] || mkdir -p /tmp/www/cgi-bin
 
+  cp -R /overlay/www/cgi-bin/* /tmp/www/cgi-bin
 
-mkdir -p /tmp/www/cgi-bin
+  unzip -o /overlay/react_client.zip -d /tmp/www
 
-cp -R /overlay/www/cgi-bin/* /tmp/www/cgi-bin
+  sync
 
-unzip -o /overlay/react_client.zip -d /tmp/www
+  echo "done"
+}
 
-sync
+stop() {
+  echo "fallback uhttpd"
+}
 
-echo "done"
+case $1 in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+esac

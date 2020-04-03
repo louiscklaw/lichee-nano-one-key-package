@@ -1,0 +1,19 @@
+#!/bin/sh
+
+start() {
+  printf "hello start"
+}
+
+
+stop() {
+  printf "hello stop"
+}
+
+case $1 in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+esac

@@ -1,17 +1,22 @@
-#!/usr/bin/sh
+#!/bin/sh
 
-# suppose running on /etc/init.d/S99_powersupply_pi
+start () {
+  rm -rf /root/.ssh
+  rm -rf /root/id_rsa
+  rm -rf /root/id_rsa.pub
 
-set -ex
+  ln -s /overlay/.ssh /root/.ssh
+  ln -s /overlay/.ssh/id_rsa /root/id_rsa
+  ln -s /overlay/.ssh/id_rsa.pub /root/id_rsa.pub
 
-cd /
+  sync
+}
 
-rm -rf /root/.ssh
-rm -rf /root/id_rsa
-rm -rf /root/id_rsa.pub
-
-ln -s /overlay/.ssh /root/.ssh
-ln -s /overlay/.ssh/id_rsa /root/id_rsa
-ln -s /overlay/.ssh/id_rsa.pub /root/id_rsa.pub
-
-sync
+case $1 in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+esac

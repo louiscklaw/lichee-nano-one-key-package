@@ -80,22 +80,23 @@ sudo du -sh output/rootfs
 
 # download to module
   # uboot
-  # sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
+  sudo sunxi-fel -v  -p spiflash-write 0 output/u-boot-sunxi-with-spl.bin
 
   # dtb
   # NOTE: edit this files only, not for download
   # /home/logic/_workspace/lichee-nano-one-key-package/linux_ws/dts_file/suniv-f1c100s-licheepi-nano.dts
-  # sudo sunxi-fel -v -p spiflash-write 0x70000 output/suniv-f1c100s-licheepi-nano.dtb
+  sudo sunxi-fel -v -p spiflash-write 0x70000 output/suniv-f1c100s-licheepi-nano.dtb
 
   # TODO: resume me
   # kernel
-  # sudo sunxi-fel -v -p spiflash-write 0x80000 output/zImage
+  ls -lh output/zImage
+  sudo sunxi-fel -v -p spiflash-write 0x80000 output/zImage
 
   # TODO: resume me
   sudo sunxi-fel -v -p spiflash-write 0x4B0000 output/rootfs.img
 
   # TODO: resume me
-  # sudo sunxi-fel -v -p spiflash-write 0xEB0000 output/overlay.img
+  sudo sunxi-fel -v -p spiflash-write 0xEB0000 output/overlay.img
 
 
 # uboot erase and reset

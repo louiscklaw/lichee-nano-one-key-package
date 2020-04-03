@@ -1,11 +1,19 @@
-#!/usr/bin/sh
+#!/bin/sh
 
-# suppose running on /etc/init.d/S99_powersupply_pi
+start () {
 
-set -ex
+  [ -d /overlay ] || mkdir -p /overlay
 
-cd /
-mkdir -p /overlay
-mount -t jffs2 /dev/mtdblock4 /overlay
+  mount -t jffs2 /dev/mtdblock4 /overlay
 
-sync
+  sync
+
+}
+case $1 in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+esac
