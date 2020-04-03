@@ -12,7 +12,7 @@ fi
 
 cd /root
   cd linux_ws
-    ./build_dts.sh > build_dts.log
+    ./build_dts.sh | tee build_dts.log
   cd ..
 cd ..
 
