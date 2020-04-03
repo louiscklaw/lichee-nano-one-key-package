@@ -18,5 +18,6 @@ id_rsa.pub
 
 __pycache__
 .env
+*.o
 
 *.ods#
