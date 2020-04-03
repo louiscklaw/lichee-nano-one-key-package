@@ -8,6 +8,11 @@ export RENEW_GIT_SOURCE=1
 export SEQUENTIAL_BUILD=1
 export DOWNLOAD_BUILDROOT=1
 
+
+
 cd .docker
   docker build -f ./docker_lichee_builder.yml . -t logickee/licheepi-nano-build
 cd ..
+
+# clear all unused image
+docker system prune
