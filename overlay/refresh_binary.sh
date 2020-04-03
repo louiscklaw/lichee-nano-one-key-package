@@ -21,9 +21,10 @@ wgetfile () {
   rm -rf $OVERLAY_PATH
   mv $TMP_PATH $OVERLAY_PATH
   safe_sync
-  chmod +x $OVERLAY_PATH
 
+  chmod +x $OVERLAY_PATH
   safe_sync
+
 }
 
 updateclient () {
@@ -81,6 +82,8 @@ cd /overlay/www/cgi-bin
   wgetfile www/cgi-bin/change_settings.sh
   wgetfile www/cgi-bin/hello_uart_off
   wgetfile www/cgi-bin/hello_ping
+  wgetfile www/cgi-bin/hello_gpio
+
 
 
 cd ../../..

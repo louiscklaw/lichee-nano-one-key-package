@@ -10,6 +10,10 @@ cd my_program
     ./build.sh
   cd ..
 
+  cd hello_gpio
+    ./build.sh
+  cd ..
+
   cd set_voltage
     ./build.sh
   cd ..
