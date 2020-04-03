@@ -40,14 +40,14 @@ else
   echo "checked docker environment, continue"
 fi
 
-cd /root
-  cd scripts
-    if [ -z "$INSTALL_BUILD_TOOLS" ]
-    then
-      echo "skipping install tools"
-    else
-      ./init.sh | tee init.log
-    fi
+cd /root/scripts
+
+    # if [ -z "$INSTALL_BUILD_TOOLS" ]
+    # then
+    #   echo "skipping install tools"
+    # else
+    #   ./init.sh | tee init.log
+    # fi
 
     if [ -n "$SEQUENTIAL_BUILD" ]
     then
@@ -65,11 +65,9 @@ cd /root
       wait
     fi
 
-  cd ..
-cd ..
+cd -
 
 # build all done
-
 generate_post_data()
 {
   HOSTNAME=`hostname`
