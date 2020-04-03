@@ -49,25 +49,6 @@
 		regulator-max-microvolt = <3300000>;
 	};
 
- 	leds {
-		compatible = "gpio-leds";
-
-		blue_led {
-			label = "licheepi:blue:usr";
-			gpios = <&pio 4 4 GPIO_ACTIVE_LOW>; /* PE4 */
-		};
-
-		green_led {
-			label = "licheepi:green:usr";
-			gpios = <&pio 4 5 GPIO_ACTIVE_LOW>; /* PE5 */
-			default-state = "on";
-		};
-
-		red_led {
-			label = "licheepi:red:usr";
-			gpios = <&pio 5 6 GPIO_ACTIVE_LOW>; /* PE6 */
-		};
-	};
 };
 
 &be0 {
