@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -vex
+set -ex
 
 export PATH=$PWD/../toolchain/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin:$PATH
 
