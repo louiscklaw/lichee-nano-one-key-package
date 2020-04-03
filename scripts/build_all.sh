@@ -42,13 +42,12 @@ fi
 
 cd /root
   cd scripts
-    # TODO: resume me
-    # if [ -z "$INSTALL_BUILD_TOOLS" ]
-    # then
-    #   echo "skipping install tools"
-    # else
-    #   ./init.sh | tee init.log
-    # fi
+    if [ -z "$INSTALL_BUILD_TOOLS" ]
+    then
+      echo "skipping install tools"
+    else
+      ./init.sh | tee init.log
+    fi
 
     if [ -n "$SEQUENTIAL_BUILD" ]
     then
