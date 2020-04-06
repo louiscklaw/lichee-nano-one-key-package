@@ -3,6 +3,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+// http://zero.lichee.pro/%E9%A9%B1%E5%8A%A8/GPIO_file.html#gpio
+
 int main(void) {
   int fd = -1;
   // fd = open("/sys/class/gpio/export", O_WRONLY);
