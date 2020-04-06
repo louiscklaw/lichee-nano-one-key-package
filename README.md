@@ -1,5 +1,8 @@
 # README.md
 
+### PWM
+http://zero.lichee.pro/%E9%A9%B1%E5%8A%A8/PWM.html
+
 ### GPIO
 https://whycan.cn/t_1647.html
 http://notes.leconiot.com/gpio_libc.html
