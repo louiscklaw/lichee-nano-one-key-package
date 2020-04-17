@@ -1,5 +1,10 @@
 # README.md
 
+### device tree/pinctrl
+https://www.raspberrypi.org/documentation/configuration/device-tree.md
+http://events17.linuxfoundation.org/sites/events/files/slides/petazzoni-device-tree-dummies.pdf
+https://www.kernel.org/doc/Documentation/leds/leds-class.txt
+
 ### PWM
 http://zero.lichee.pro/%E9%A9%B1%E5%8A%A8/PWM.html
 
@@ -61,12 +66,28 @@ $ docker build -f ./docker_lichee_builder.yml . -t logickee/licheepi-nano-build
 
 ```
 
+### refresh_binary.sh
+```
+# on host
+cd overlay
+$ python -m SimpleHTTPServer 8000
+
+
+# to update the user program
+$ cd /overlay
+$ ./refresh_binary.sh
+
+# using python fabirc
+# on host
+$ fab update_binary
+```
+
 ### to compile user program
 - ensure the rootfs were compiled and run-able
 - it requires a workable musl compiler from rootfs/host directory
 ```
-$ cd my_program
-$ ./build_all.sh
+# on /root
+$ ./my_program/build_all.sh
 ```
 
 Busybox的设置
