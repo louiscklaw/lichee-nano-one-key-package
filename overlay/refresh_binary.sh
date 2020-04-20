@@ -57,6 +57,7 @@ updateinitd () {
 
 cd /overlay
   wgetfile refresh_binary.sh
+  wgetfile refresh_binary_content.sh
   # wget http://192.168.99.253:8000/refresh_binary.sh -O /tmp/refresh_binary.sh
 
   mkdir -p /overlay/www/cgi-bin
@@ -66,83 +67,9 @@ cd /overlay
 
 cd ..
 
-sleep 3
+safe_sync
 
-cd /overlay/www
-  # index.html
-  wgetfile www/index.html
-
-cd ../..
-
-cd /overlay/www/cgi-bin
-  # hello_json.sh
-  wgetfile www/cgi-bin/hello_json.sh
-
-  wgetfile www/cgi-bin/set_voltage
-  wgetfile www/cgi-bin/change_settings.sh
-  wgetfile www/cgi-bin/hello_uart_off
-  wgetfile www/cgi-bin/hello_ping
-  wgetfile www/cgi-bin/hello_gpio
-
-
-
-cd ../../..
-
-cd /overlay
-  mkdir -p /tmp/utils
-  mkdir -p /overlay/utils
-
-  wgetfile utils/send_slack.sh
-  # wget http://192.168.99.253:8000/utils/send_slack.sh
-
-
-  wgetfile utils/send_slack.sh
-  wgetfile utils/send_slack_module_ready.sh
-  wgetfile utils/send_slack_job_done.sh
-  wgetfile utils/send_slack_httpd_started.sh
-  wgetfile utils/send_slack_helloworld.sh
-  wgetfile utils/send_slack_module_ready.sh
-
-  wgetfile init_main.sh
-
-cd ..
-
-cd /etc
-  # wget http://192.168.99.253:8000/init.d/S11dps_files_link -O /tmp/S11dps_files_link
-  # chmod +x /tmp/S11dps_files_link
-  # rm -rf S11dps_files_link
-  # mv /tmp/S11dps_files_link /etc/init.d/S11dps_files_link
-  # sleep 0.5
-
-  updateinitd S10dps_mount
-  updateinitd S11dps_files_link
-
-  updateinitd S13helloworld
-
-  updateinitd S90_start_wifi
-  updateinitd S91_extract_client
-  updateinitd S92_start_uhttpd
-  updateinitd S98gpio_enable
-  updateinitd S99init_powersupply_pi
-
-  # wget http://192.168.99.253:8000/init.d/S10dps_mount -O /tmp/S10dps_mount
-  # chmod +x /tmp/S10dps_mount
-  # rm -rf S10dps_mount
-  # mv /tmp/S10dps_mount /etc/init.d/S10dps_mount
-
-  # wget http://192.168.99.253:8000/init.d/S99init_powersupply_pi -O /tmp/S99init_powersupply_pi
-  # chmod +x /tmp/S99init_powersupply_pi
-  # rm -rf S99init_powersupply_pi
-  # mv /tmp/S99init_powersupply_pi /etc/init.d/S99init_powersupply_pi
-  # sleep 0.5
-
-cd ..
-
-cd /overlay
-  # wget http://192.168.99.253:8000/react_client.zip -O /tmp/react_client.zip
-  updateclient
-
-cd -
+/overlay/refresh_binary_content.sh
 
 safe_sync
 
