@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# https://linux-sunxi.org/GPIO
+
 start() {
   printf "Starting GPIO"
   # gpio130
