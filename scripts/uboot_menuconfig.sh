@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -ex
+
 cp uboot_ws/.config/.config uboot_ws/u-boot/.config
 
 cd uboot_ws/u-boot

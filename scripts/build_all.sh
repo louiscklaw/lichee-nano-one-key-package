@@ -34,7 +34,7 @@ fi
 
 if [ -z "$DOCKER_ENVIRONEMNT" ]
 then
-  # ERROR: should be launch inside docker
+  echo "should run inside docker"
   exit 99
 else
   echo "checked docker environment, continue"
@@ -52,10 +52,10 @@ cd /root/scripts
     if [ -n "$SEQUENTIAL_BUILD" ]
     then
       echo "start sequential build"
-      ./build_zImage.sh | tee build_zImage.log
+      # ./build_zImage.sh | tee build_zImage.log
       ./build_dts.sh | tee build_dts.log
-      ./build_uboot.sh  | tee build_uboot.log
-      ./build_rootfs.sh | tee build_rootfs.log
+      # ./build_uboot.sh  | tee build_uboot.log
+      # ./build_rootfs.sh | tee build_rootfs.log
     else
       echo "start parallel build"
       ./build_zImage.sh | tee build_zImage.log &
