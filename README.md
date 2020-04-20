@@ -68,10 +68,9 @@ $ docker build -f ./docker_lichee_builder.yml . -t logickee/licheepi-nano-build
 
 ### refresh_binary.sh
 ```
-# on host
+# on host, start_http.sh
 cd overlay
 $ python -m SimpleHTTPServer 8000
-
 
 # to update the user program
 $ cd /overlay
