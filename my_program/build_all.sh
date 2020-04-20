@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
+
 set -xe
 
 export PATH=/root/rootfs_ws/buildroot-2019.11.1/output/host/bin:$PATH
 
-pwd
 cd my_program
 
   cd helloworld
@@ -30,6 +30,13 @@ cd my_program
     ./build.sh
   cd ..
 
+  cd hello_1k_pwm
+    ./build.sh
+  cd ..
+
+  cd hello_driving_pwm
+    ./build.sh
+  cd ..
 
 cd ..
 exit 0
