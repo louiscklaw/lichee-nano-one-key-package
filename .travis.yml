@@ -3,75 +3,20 @@
 # https://docs.travis-ci.com/user/job-lifecycle/
 
 # You can import up to 25 other configs in total.
-
-version: ~> 1.0
-
 os: linux
-language: generic
 
-services:
-  - docker
+language: node_js
+
+node_js:
+  - 12
 
 cache:
-  directories:
-    - /home/travis/rootfs_ws/buildroot-2019.11.1
+  - npm
+  - pip
 
-jobs:
-  include:
-    - stage: BuildDockerImage
-      name: "build docker image"
-      before_script:
-        - docker pull logickee/licheepi-nano-build:latest
-      script:
-        - ./scripts/build_docker_image.sh
+import:
+  - credentials.yml
 
-      after_success:
-        - docker login -u logickee -p $DOCKERHUB_PASSWORD
-        - docker push logickee/licheepi-nano-build:latest
-
-    - stage: Build
-      name: "build uboot"
-      script:
-        - travis_wait 50 sleep infinity & docker run -t --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_uboot.sh >build_uboot.log 2>&1
-
-    - stage: Build
-      name: "build linux/zImage/kernel"
-      script:
-        - travis_wait 50 sleep infinity & docker run -t --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  /root/scripts/build_zImage.sh >build_zimage.log 2>&1
-
-    - stage: Build
-      name: "build rootfs"
-      script:
-        - travis_wait 50 sleep infinity & docker run -it --env CI=1 -v $PWD:/root logickee/licheepi-nano-build  bash -c /root/scripts/build_rootfs.sh >build_rootfs.log 2>&1
-      after_script:
-        - tail -100 build_rootfs.log
-      after_failure:
-        - tail -500 build_rootfs.log
-
-    - stage: after_build
-      name: "build image"
-      script:
-        - echo "after build"
-
-    - stage: Merge
-      name: "merge to develop"
-      script:
-        - echo $TRAVIS_BUILD_STAGE_NAME
-        - if [ "$TRAVIS_BUILD_STAGE_NAME" = "Merge" ]; then ./.travis/merge_if_success.sh; fi
-
-
-env:
-  global:
-    - INSTALL_BUILD_TOOLS=1
-    - CLEAR_WORKSPACE_BEFORE_BUILD=1
-    - RENEW_GIT_SOURCE=1
-    - SEQUENTIAL_BUILD=1
-    - DOWNLOAD_BUILDROOT=1
-
-    - secure: "Z6/Qcqqj9GWARJR9YSBluBEr9AinQBR4kC+k/uZ6nnHZXP2LzoF/tIaKzLU3yl379HjF8JTOfyEzwSreyHLhBT7y4AGHcuw4kx7NvqQqlBzuo4VQ/dp0IBu+d2qIJqTiD56I4un/zV+jYUVinjACg0Jl9YfDB2ZY8Pg9dG86aoKR2LWBCjVthmRUHqq2A5+ErPr8K4ass1oijqqGbHr8VX4y2EhqkT47fQTWM+6VgrP0aG6vF8Z1/aHJnni8ACMN47SLR+VNBCzuUEqmf74ZPz50RxVBWNvUxE1VbfcTEpeAx5A+YYjqOaWL7D3dN9Ay23yob7n+dgkzUgAa9MMf8vxeyN0uXXqASAu5Ex65IecKfdYheNHSrv4scF1K0ypymmoF9IuYd1HM3tJ93EUWz1yB19p28VFl86V/TPQNkKlfYaQNHbgaxY1pfxc7I0oM3SGOQN72qU7i7RPfmSva7nDEpUXRwoJH7ZU22X/ZoN5wEaoj95lD9gUGU+Dg3FhBQQzU5vNsO/GbNyxkNNIixgnd4xR2G2QBFgvWDdrAGogVcwBFZ2tFDxxmqjtqokjksDs2VLfMoK0OM3bHOuyqB8gwgGU7Soh/VliazeGbZ2bChUAGPkUnvmCJCGh7jlfAMUvV9IYkfF2xEfSeBvkWtcOhBI+TpplZ1j0v+RJXow4="
-
-    - secure: "souZy1xMEEM0P7iqn8iEw0X6vfVGqxqf+gnx7wgcovxDpwyXJ17p2OAlJ7/T50Y3SQa6EmXmLSxMnXwe7f0/kKp+2PovOsAZ5ku8vm35ckz1f0F8jzX+vGKcQ+rNq0mjtsQJmA4RSr+IqZoqpjEj0ciLRbV3I+//qD5J2kpTFlO+bHX6inmKkt24f3NwmdnfF+lo9CMZETrjJ4eE/HNyv36SsaeZFElSPpkyYL/lTtx4TFYwtdpLDoibNlVnCVunrcdVCGYYqs0U5ve+U476ly/+47bdHUntydrpueFUrNDySRZ7DagA5F+O9LCs/fJVprq8ODfzgysRB4S36kMthBYyhiTIuFLHsgbH+Vma02ruE5AElFn9YQg/50x9ehS7IfBv26b8c21akaY36VAlSUKeAp9Xc8XooUtkkXfdaK2XA6iH8nVR0YbIMlihq8dZW0gb9yc2O9AXwelwU1egFzwoninmTyGgfGZ3Z5O/RxVLkQYl3BmQomYwkftIeYpq2+30/vda3o+7L4Ze4nGqylRWNXSRrmjcmEIJxXwAMOWE6Y6x5BRAC0i+rL9lq2Rpo3H1HgUI2//2NrraFEVSOUM3N2zRGIeoZMdLa2ZIlMTQL6T5leLoBOHEF4y9psk/Jd2mFjLNmfMXEp4vZ56pkoW0EvtoXVJEV0K8VwGynC8="
-
-    - secure: "UyyZy5JknwcnQGLGAeLK3Kp6ji6TszHTfoAGL+kAa4WIOHM7pPizLnQ4U/jvFxtiQBwcFCu03YN+0+hewOSBHoQabxiPrFOE/onYiNn3Dvf1FTZhb3hFCxgNNzcXNaf6rt1yjNXr23mFRV4J/qWFFd/joC0bYX5yr8nkquGokR78HDf8W/wx3rMt1O7QMY3MGCx4nYEaTcuPWZp9sKdpYIWSB/IxcSnnnUACGaoabRBDdIAm+g4oPdysCHy1RnN7ebV1OHwvD/zfDdZMLr/mtT229LUDByrjKOCNhUEYyzy725Ac4JHWig908SAymsFxiwFn5obUdlrN/cnrZ8XMaeBMvVptwHh3DpOfGp55EM8zOh0vmPdRA5oiV0TGBKSXEndH1zValRJQl2vULxjY/WZ0f+UzDn+fnWxgfAYohU3e1aFPze745v7bNFktp95Oge27n0WLi72OrMMsx/HKCV10F5HsuXPftTJXAS/QSE9qi8xrFkfHezdyp/pbEhKnt+IfuKmvZ4NLTharhz4LRfx/C2Za0BPFVVNrjADLopvNa3FslDuenGXzt8KHzka6NEwM2y3mm3F9ZuyGZuVas04Z/aulhD1gkJDrYQtDzsjFU4KKm2AAEBKg2sbPnsBUUOzZ0qSyVYdVtg884v90LSfsO24ToaE2uStg+9/ga7s="
-
-    - secure: "IkaQJS11Dw6wF1WeX7OTZeuca/MbMQyFBvcAk+fh/2HsT7tehNKSjEFpyjypLaarah+fVckfkCt+wKFqaU212SExw5mz36CUOIuPPDaYgeXNGWX59A6q5dCdj3INieoNuTTS2+KczTYrTjaNFVHt0H0DL0Xi3izFAs69Q2UiJC4B3GClPzo097gMqRc9oupbE+/FS//f+5ze4EsbRQYMDORAcinvZd5zewCeOIifKLgv0tUrwyW4HrMVisdrUds+Gcpg5OvhFhmmZZYzzSJwOTWF6X6XTBXWUUIcES3qd2DZPjBfttpoHA39bkmfRf2Aj+ia3lhYXpVHIzED27r5vmnhZHydux6/Z0Pe0/p+OoumlgE/Mkz1DBWjR9NlV5xN+8ZAs1fEbJ6iUsIwGX5B3HB3WpzBRteJDEKQGSbK3H2Zs1yAvBvVZHTXkoEqp4tethAUo1F6IY7gnL6ypL9JIgwa8lNA20fnQaTrrHyDeg92JHTZBdb+Tbdy0aCE+34xpT5Emq4TR831tQ+HKQGfuPwFZyBhhMAVoI1RCtjx3avBLG3+ZMtLUhaPpBYgAZYqZYOLCgs80bAR+HSKCzLoKyJgHCJEvDHp6MjNVAG9eKizUE8tJ86MxcNI+7oh0cSmVsvtT4pGRWE5pab/LpDEQjRfNJ4TteWgLh5CYfiDi/M="
+script:
+  - wget https://raw.githubusercontent.com/louiscklaw/travis-playlist/master/travis-build-merger/merge_if_success.sh
+  - bash merge_if_success.sh | tee merge.log
